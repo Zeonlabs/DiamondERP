@@ -1,0 +1,133 @@
+{
+  "name": "gaushala-trust-accounting",
+  "homepage": "./",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build-server-and-del": "npm run build-ts && del tsconfig.json",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build-ts": "tsc",
+    "watch-node": "nodemon server/dist/server.js",
+    "watch-ts": "tsc -w",
+    "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "electron": "electron .",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Gaushala Trust Accounting\"",
+    "package-linux": "electron-packager . gaushala-trust-accounting --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/linux-icon.png --prune=true --out=release-builds",
+    "electron-pack": "build -mw",
+    "dist": "electron-builder"
+  },
+  "main": "public/electron.js",
+  "author": {
+    "name": "Zeonlabs",
+    "email": "zeonlabs@outlook.com",
+    "url": "https://zeonlabs.co"
+  },
+  "build": {
+    "appId": "com.zeonlabs.gaushala-trust-accounting",
+    "productName": "Gaushala Trust Accounting",
+    "copyright": "Copyright © 2020 ${author}",
+    "mac": {
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.9.1",
+    "@nivo/bar": "^0.61.1",
+    "@nivo/line": "^0.61.1",
+    "@nivo/pie": "^0.61.1",
+    "@types/express-fileupload": "^1.1.2",
+    "animated-number-react": "0.0.2",
+    "antd": "^3.22.0",
+    "axios": "^0.19.0",
+    "carbon-components": "^10.12.0",
+    "carbon-components-react": "^7.12.0",
+    "carbon-icons": "^7.0.7",
+    "compass": "^0.1.1",
+    "concurrently": "^4.1.2",
+    "cors": "^2.8.5",
+    "cross-env": "^6.0.2",
+    "dotenv": "^8.1.0",
+    "electron-is-dev": "^1.1.0",
+    "electron-logger": "0.0.3",
+    "electron-packager": "^14.2.1",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "highcharts": "^8.0.4",
+    "indian-number-format": "^1.0.4",
+    "is-online": "^8.2.0",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongoose": "^5.8.11",
+    "mongoose-paginate-v2": "^1.3.6",
+    "node-sass": "^4.13.1",
+    "number-to-words": "^1.2.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-loading": "^2.0.3",
+    "react-redux": "^7.1.0",
+    "react-resizable": "^1.8.0",
+    "react-responsive-modal": "^4.0.1",
+    "react-router": "^5.0.1",
+    "react-router-config": "1.0.0-beta.4",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.3.1",
+    "react-table": "^6.10.3",
+    "react-to-print": "^2.6.3",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-logger": "^3.0.6",
+    "redux-logic": "^2.1.1",
+    "redux-thunk": "^2.3.0",
+    "simple-crypto-js": "^2.2.0",
+    "simple-react-toast": "^1.0.3",
+    "tachyons-components": "^1.0.1",
+    "typescript": "^3.7.5",
+    "update-electron-app": "^1.5.0",
+    "vue-template-compiler": "^2.6.10",
+    "wait-on": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/lodash": "^4.14.149",
+    "@types/mongoose": "^5.7.0",
+    "@types/mongoose-paginate-v2": "^1.3.1",
+    "electron-builder": "^21.2.0",
+    "electron-rebuild": "^1.10.0",
+    "tslint": "^6.0.0",
+    "electron": "^8.2.1"
+  }
+}
