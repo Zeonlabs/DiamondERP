@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import SplashScreen from "./splashScreen";
 import ZeonlabsLogo from "./zeonlabsLogo";
 import RightSideForm from "./rightSideForm";
+import SignInPage from "./signInPage";
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      login: true,
+    };
   }
+
+  onClickNotHavePassword = () => {
+    this.setState({ login: !this.state.login });
+  };
 
   render() {
     return (
@@ -33,11 +40,23 @@ class LoginPage extends Component {
           </div>
         </div>
         <div className="right_side_wrapper">
-          <div className="right_side_inner_wrapper">
-            <h2>Sign Up</h2>{" "}
-            <p>Please provide sufficient details to explore the system.</p>
-            <RightSideForm />
-          </div>
+          {this.state.login ? (
+            <div className="right_side_inner_wrapper">
+              <h2>Sign In</h2>{" "}
+              <p>Please provide sufficient details to explore the system.</p>
+              <SignInPage
+                onClickNotHavePassword={this.onClickNotHavePassword}
+              />
+            </div>
+          ) : (
+            <div className="right_side_inner_wrapper">
+              <h2>Sign Up</h2>{" "}
+              <p>Please provide sufficient details to explore the system.</p>
+              <RightSideForm
+                onClickNotHavePassword={this.onClickNotHavePassword}
+              />
+            </div>
+          )}
         </div>
       </div>
     );

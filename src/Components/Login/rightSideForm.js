@@ -1,12 +1,6 @@
 import React, { Component } from "react";
-import {
-  Form,
-  FormGroup,
-  TextInput,
-  Button,
-  RadioButton,
-  RadioButtonGroup,
-} from "carbon-components-react";
+import { Form, FormGroup, TextInput, Button } from "carbon-components-react";
+import { Help16 } from "@carbon/icons-react";
 
 export default class RightSideForm extends Component {
   constructor(props) {
@@ -20,6 +14,7 @@ export default class RightSideForm extends Component {
   handelSubmit = (e) => {
     e.preventDefault();
     console.log("e", this.state);
+    this.props.onClickNotHavePassword();
   };
 
   handelOnchange = (e) => {
@@ -41,7 +36,7 @@ export default class RightSideForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sign_up_form_wrappper">
         <Form onSubmit={this.handelSubmit}>
           <div className="sign_up_form_div">
             <FormGroup className="signup_form_single_element">
@@ -116,45 +111,17 @@ export default class RightSideForm extends Component {
               />
             </FormGroup>
           </div>
-          <div>
-            <FormGroup>
-              <RadioButtonGroup
-                labelPosition="right"
-                orientation="horizontal"
-                defaultSelected="default-selected"
-                legend="Group Legend"
-                name="radio-button-group"
-                onChange={this.handelRadio}
-                valueSelected="default-selected"
-              >
-                <RadioButton
-                  id="radio-1"
-                  labelText="Radio button label"
-                  name="plan"
-                  value="basic"
-                  className="plan_radio_button"
-                />
-                <RadioButton
-                  id="radio-2"
-                  name="plan"
-                  labelText="Radio button label"
-                  value="Stander"
-                />
-                <RadioButton
-                  id="radio-3"
-                  name="plan"
-                  labelText="Radio button label"
-                  value="Premium"
-                />
-              </RadioButtonGroup>
-            </FormGroup>
+          <p className="contact_for_more_info">
+            <Help16 className="for_more_info_icon" /> For more contact us
+          </p>
+          <div className="form_submit_button_wrapper">
+            <Button kind="primary" type="submit">
+              Submit
+            </Button>
+            <Button kind="secondary" type="submit">
+              cancel
+            </Button>
           </div>
-          <Button kind="primary" type="submit">
-            Submit
-          </Button>
-          <Button kind="secondary" type="submit">
-            cancel
-          </Button>
         </Form>
       </div>
     );

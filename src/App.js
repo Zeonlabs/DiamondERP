@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, HashRouter } from "react-router-dom";
 import routes from "./js/Routes";
+import DashboardIndexPage from "../src/Components/Dashboard/index";
 // import Home from "../Components/Dashboard/Home";
 // import Expences from "../Components/Expences/Expences";
 // import Cheques from "../Components/Cheques/Cheques";
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <HashRouter>
         <Route exact path={routes.landingPage} component={LandingPage} />
+        <Route path={routes.dashboard} component={DashboardIndexPage} />
         {/* <Route path={routes.dashboard} component={Home} />
         <Route path={routes.charity} component={Income} />
         <Route path={routes.expences} component={Expences} />

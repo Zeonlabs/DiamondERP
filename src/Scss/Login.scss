@@ -92,27 +92,30 @@
         width: 48%;
       }
     }
-    .plan_radio_button {
-      height: 82px;
-      padding: 12px;
-      background-color: black;
-      color: white;
-      .bx--radio-button__label {
-        display: flex;
-        flex-direction: row-reverse;
-        .bx--radio-button__appearance {
-          margin-right: 0;
-          margin-left: 0.5rem;
-          height: 12px;
-          width: 12px;
-          border-color: white;
-          &::before {
-            width: 6px;
-            height: 6px;
-            background-color: white;
-          }
-        }
+    .sign_up_form_wrappper {
+      margin-top: 32px;
+    }
+    .contact_for_more_info {
+      margin-bottom: 16px;
+      font-size: 12px;
+      .for_more_info_icon {
+        width: 12px;
+        height: 12px;
       }
+    }
+    .form_submit_button_wrapper {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      button {
+        width: 45%;
+        padding: 4%;
+        place-content: center;
+      }
+    }
+    .sign_in_page_links_wrapper {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

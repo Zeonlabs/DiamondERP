@@ -2,3 +2,13 @@ body {
   margin: 0px;
   font-family: "IBM Plex Sans";
 }
+
+@media (min-width: 66rem) {
+  .sidebar-content {
+    margin-left: 20% !important;
+  }
+}
+
+.bx--side-nav__navigation {
+  box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.32);
+}
