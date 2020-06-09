@@ -2,16 +2,19 @@ import React from "react";
 import { BrowserRouter, Route, HashRouter } from "react-router-dom";
 import routes from "./js/Routes";
 import DashboardIndexPage from "../src/Components/Dashboard/index";
-// import Home from "../Components/Dashboard/Home";
-// import Expences from "../Components/Expences/Expences";
-// import Cheques from "../Components/Cheques/Cheques";
-// import Animal from "../Components/Animal/Animal";
-// import Employees from "../Components/Employees/Employees";
-// import Notes from "../Components/Notes/Notes";
-// import TrustMembers from "../Components/TrustMembers/TrustMembers";
-// import Income from "../Components/CharityIncome/Income";
-// import SettingPage from "../Components/SettingPage/SettingPage";
 import LandingPage from "./Components/Login/landingPage";
+import RoughIndex from "./Components/Rough/RoughIndex";
+import OfficeIndex from "./Components/Office/OfficeIndex";
+import FactoryIndex from "./Components/Factory/FactoryIndex";
+import OrderIndex from "./Components/Order/OrderIndex";
+import PolishIndex from "./Components/Report/Polish/PolishIndex";
+import PacketStatusIndex from "./Components/Report/PacketStatus/PacketIndex";
+import TotalCostIndex from "./Components/Report/TotalCost/TotalCostIndes";
+import SellerIndex from "./Components/Selling/Seller/SellerIndex";
+import BuyerIndex from "./Components/Selling/Buyer/BuyerIndex";
+import BrokerIndex from "./Components/Selling/Broker/BrokerIndex";
+import CostModelIndex from "./Components/CostModel/CostModelIndex";
+import SettingIndex from "./Components/Setting/SettingIndex";
 
 function App() {
   return (
@@ -19,6 +22,19 @@ function App() {
       <HashRouter>
         <Route exact path={routes.landingPage} component={LandingPage} />
         <Route path={routes.dashboard} component={DashboardIndexPage} />
+        <Route path={routes.rough} component={RoughIndex} />
+        <Route path={routes.office} component={OfficeIndex} />
+        <Route path={routes.factory} component={FactoryIndex} />
+        <Route path={routes.order} component={OrderIndex} />
+        <Route path={routes.polishreport} component={PolishIndex} />
+        <Route path={routes.packetreport} component={PacketStatusIndex} />
+        <Route path={routes.costreport} component={TotalCostIndex} />
+        <Route path={routes.seller} component={SellerIndex} />
+        <Route path={routes.buyer} component={BuyerIndex} />
+        <Route path={routes.broker} component={BrokerIndex} />
+        <Route path={routes.costMaster} component={CostModelIndex} />
+        <Route path={routes.settingpage} component={SettingIndex} />
+
         {/* <Route path={routes.dashboard} component={Home} />
         <Route path={routes.charity} component={Income} />
         <Route path={routes.expences} component={Expences} />

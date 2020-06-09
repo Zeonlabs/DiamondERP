@@ -19,122 +19,159 @@ import {
   SideNavItems,
   SideNavLink,
   SideNavMenu,
-  SideNavMenuItem,
 } from "carbon-components-react/lib/components/UIShell";
-import { Dashboard32 } from "@carbon/icons-react";
+import {
+  Dashboard32,
+  ChartRadar32,
+  Portfolio32,
+  Industry32,
+  TextMining32,
+  Report32,
+  HeatMap32,
+  DataRefinery32,
+  Model32,
+  SaveModel32,
+  FlaggingTaxi32,
+  WatsonHealthCrossReference32,
+  UserProfileAlt32,
+  Event32,
+  Product32,
+  Settings32,
+} from "@carbon/icons-react";
+import { withRouter } from "react-router";
+import routes from "../../js/Routes";
+import { Link } from "react-router-dom";
 
-const Fade16 = () => (
-  <svg
-    width="16"
-    height="16"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 32 32"
-    aria-hidden="true"
-  >
-    <path d="M8.24 25.14L7 26.67a14 14 0 0 0 4.18 2.44l.68-1.88a12 12 0 0 1-3.62-2.09zm-4.05-7.07l-2 .35A13.89 13.89 0 0 0 3.86 23l1.73-1a11.9 11.9 0 0 1-1.4-3.93zm7.63-13.31l-.68-1.88A14 14 0 0 0 7 5.33l1.24 1.53a12 12 0 0 1 3.58-2.1zM5.59 10L3.86 9a13.89 13.89 0 0 0-1.64 4.54l2 .35A11.9 11.9 0 0 1 5.59 10zM16 2v2a12 12 0 0 1 0 24v2a14 14 0 0 0 0-28z" />
-  </svg>
-);
+const NevigationArray = [
+  { iconName: Dashboard32, name: "Dashboard", url: routes.dashboard },
+  { iconName: ChartRadar32, name: "Rough", url: routes.rough },
+  { iconName: Portfolio32, name: "Office", url: routes.office },
+  { iconName: Industry32, name: "Factory", url: routes.factory },
+  { iconName: TextMining32, name: "Order Summary", url: routes.order },
+  {
+    dropdown: "yes",
+    iconName: Report32,
+    name: "Report",
+    innerNevigation: [
+      { iconName: HeatMap32, name: "Polish", url: routes.polishreport },
+      {
+        iconName: DataRefinery32,
+        name: "Packet Status",
+        url: routes.packetreport,
+      },
+      { iconName: Model32, name: "Total Cost", url: routes.costreport },
+    ],
+  },
+  {
+    dropdown: "yes",
+    iconName: SaveModel32,
+    name: "Selling",
+    innerNevigation: [
+      { iconName: FlaggingTaxi32, name: "Seller", url: routes.seller },
+      {
+        iconName: WatsonHealthCrossReference32,
+        name: "Buyer",
+        url: routes.buyer,
+      },
+      { iconName: UserProfileAlt32, name: "Broker", url: routes.broker },
+    ],
+  },
+  {
+    dropdown: "yes",
+    iconName: Event32,
+    name: "Employees",
+    innerNevigation: [
+      { iconName: FlaggingTaxi32, name: "Seller", url: routes.seller },
+      {
+        iconName: WatsonHealthCrossReference32,
+        name: "Buyer",
+        url: routes.buyer,
+      },
+      { iconName: UserProfileAlt32, name: "Broker", url: routes.broker },
+    ],
+  },
+  { iconName: Product32, name: "Cost Master", url: routes.costMaster },
+  { iconName: Settings32, name: "Setting", url: routes.settingpage },
+];
 
-const Sidebar = (props) => (
-  <div className="container">
-    <HeaderContainer
-      render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-        <>
-          <Header aria-label="IBM Platform Name">
-            <SkipToContent />
-            <HeaderMenuButton
-              aria-label="Open menu"
-              onClick={onClickSideNavExpand}
-              isActive={isSideNavExpanded}
-            />
-            <HeaderName href="#" prefix="IBM">
-              [Platform]
-            </HeaderName>
-            <HeaderGlobalBar>
-              <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-                <Search20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="Notifications" onClick={() => {}}>
-                <Notification20 />
-              </HeaderGlobalAction>
-              <HeaderGlobalAction aria-label="App Switcher" onClick={() => {}}>
-                <AppSwitcher20 />
-              </HeaderGlobalAction>
-            </HeaderGlobalBar>
-            <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
-              <SideNavItems>
-                <SideNavLink renderIcon={Dashboard32} href="javascript:void(0)">
-                  Dashboard
-                </SideNavLink>
-                {/* <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)"
-                  >
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu> */}
-                {/* <SideNavMenu renderIcon={Fade16} title="Category title">
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem
-                    aria-current="page"
-                    href="javascript:void(0)"
-                  >
-                    Link
-                  </SideNavMenuItem>
-                  <SideNavMenuItem href="javascript:void(0)">
-                    Link
-                  </SideNavMenuItem>
-                </SideNavMenu> */}
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Rough
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Office
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Factory
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Order Summary
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Report
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Seller
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Employee
-                </SideNavLink>
-                <SideNavLink renderIcon={Fade16} href="javascript:void(0)">
-                  Cost Model
-                </SideNavLink>
-              </SideNavItems>
-            </SideNav>
-          </Header>
-          {/* <StoryContent /> */}
-          <Content id="main-content">
-            <div className="bx--grid">
-              <div className="bx--row">
-                <section className="bx--offset-lg-3 bx--col-lg-13 sidebar-content">
-                  {props.children}
-                </section>
+const Sidebar = (props) => {
+  return (
+    <div className="container">
+      <HeaderContainer
+        render={({ isSideNavExpanded, onClickSideNavExpand }) => (
+          <>
+            <Header aria-label="IBM Platform Name">
+              <SkipToContent />
+              <HeaderMenuButton
+                aria-label="Open menu"
+                onClick={onClickSideNavExpand}
+                isActive={isSideNavExpanded}
+              />
+              <HeaderName prefix="Diamond ERP">[Platform]</HeaderName>
+              <HeaderGlobalBar>
+                <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
+                  <Search20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="Notifications"
+                  onClick={() => {}}
+                >
+                  <Notification20 />
+                </HeaderGlobalAction>
+                <HeaderGlobalAction
+                  aria-label="App Switcher"
+                  onClick={() => {}}
+                >
+                  <AppSwitcher20 />
+                </HeaderGlobalAction>
+              </HeaderGlobalBar>
+              <SideNav
+                aria-label="Side navigation"
+                expanded={isSideNavExpanded}
+              >
+                <SideNavItems>
+                  {NevigationArray.map((value, id) => (
+                    <>
+                      {" "}
+                      {value.dropdown ? (
+                        <SideNavMenu
+                          renderIcon={value.iconName}
+                          title={value.name}
+                        >
+                          {value.innerNevigation.map((data) => (
+                            <Link to={data.url}>
+                              <SideNavLink renderIcon={data.iconName}>
+                                {data.name}
+                              </SideNavLink>
+                            </Link>
+                          ))}
+                        </SideNavMenu>
+                      ) : (
+                        <Link to={value.url}>
+                          <SideNavLink renderIcon={value.iconName}>
+                            {value.name}
+                          </SideNavLink>
+                        </Link>
+                      )}
+                    </>
+                  ))}
+                </SideNavItems>
+              </SideNav>
+            </Header>
+            <Content id="main-content">
+              <div className="bx--grid">
+                <div className="bx--row">
+                  <section className="bx--offset-lg-3 bx--col-lg-13 sidebar-content">
+                    {props.children}
+                  </section>
+                </div>
               </div>
-            </div>
-          </Content>
-        </>
-      )}
-    />
-  </div>
-);
+            </Content>
+          </>
+        )}
+      />
+    </div>
+  );
+};
 
-export default Sidebar;
+export default withRouter(Sidebar);
