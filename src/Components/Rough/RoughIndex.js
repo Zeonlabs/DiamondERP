@@ -10,7 +10,7 @@ class RoughIndex extends Component {
 
   render() {
     return (
-      <Sidebar>
+      <Sidebar title="Rough List" button="Add Rough">
         <div>Roughs</div>
       </Sidebar>
     );

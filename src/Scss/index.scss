@@ -1,5 +1,6 @@
-@import "./Common.scss";
+@import "./Common/Common.scss";
 @import "./Login.scss";
+@import "./PageStyle.scss";
 @import "carbon-components/scss/globals/scss/styles.scss";
 $carbon--theme: $carbon--theme--g100;
 @include carbon--theme();

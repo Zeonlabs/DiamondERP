@@ -1,8 +1,4 @@
-// ------------------------------------------------
-// PLEASE DO NOT EDIT. FORK IF YOU NEED TO MODIFY.
-// ------------------------------------------------
-
-import React from "react";
+import React, { useState } from "react";
 import Search20 from "@carbon/icons-react/lib/search/20";
 import Notification20 from "@carbon/icons-react/lib/notification/20";
 import AppSwitcher20 from "@carbon/icons-react/lib/app-switcher/20";
@@ -17,8 +13,7 @@ import {
   SkipToContent,
   SideNav,
   SideNavItems,
-  SideNavLink,
-  SideNavMenu,
+  // SideNavMenu,
 } from "carbon-components-react/lib/components/UIShell";
 import {
   Dashboard32,
@@ -37,64 +32,92 @@ import {
   Event32,
   Product32,
   Settings32,
+  ChevronDown32,
 } from "@carbon/icons-react";
 import { withRouter } from "react-router";
 import routes from "../../js/Routes";
 import { Link } from "react-router-dom";
-
-const NevigationArray = [
-  { iconName: Dashboard32, name: "Dashboard", url: routes.dashboard },
-  { iconName: ChartRadar32, name: "Rough", url: routes.rough },
-  { iconName: Portfolio32, name: "Office", url: routes.office },
-  { iconName: Industry32, name: "Factory", url: routes.factory },
-  { iconName: TextMining32, name: "Order Summary", url: routes.order },
-  {
-    dropdown: "yes",
-    iconName: Report32,
-    name: "Report",
-    innerNevigation: [
-      { iconName: HeatMap32, name: "Polish", url: routes.polishreport },
-      {
-        iconName: DataRefinery32,
-        name: "Packet Status",
-        url: routes.packetreport,
-      },
-      { iconName: Model32, name: "Total Cost", url: routes.costreport },
-    ],
-  },
-  {
-    dropdown: "yes",
-    iconName: SaveModel32,
-    name: "Selling",
-    innerNevigation: [
-      { iconName: FlaggingTaxi32, name: "Seller", url: routes.seller },
-      {
-        iconName: WatsonHealthCrossReference32,
-        name: "Buyer",
-        url: routes.buyer,
-      },
-      { iconName: UserProfileAlt32, name: "Broker", url: routes.broker },
-    ],
-  },
-  {
-    dropdown: "yes",
-    iconName: Event32,
-    name: "Employees",
-    innerNevigation: [
-      { iconName: FlaggingTaxi32, name: "Seller", url: routes.seller },
-      {
-        iconName: WatsonHealthCrossReference32,
-        name: "Buyer",
-        url: routes.buyer,
-      },
-      { iconName: UserProfileAlt32, name: "Broker", url: routes.broker },
-    ],
-  },
-  { iconName: Product32, name: "Cost Master", url: routes.costMaster },
-  { iconName: Settings32, name: "Setting", url: routes.settingpage },
-];
+import PageTopSection from "./PageTopSection";
 
 const Sidebar = (props) => {
+  const [reportCollaps, setReport] = useState(
+    props.location.pathname.split("/")[2] === "Report" ? true : false
+  );
+  const [sellingCollaps, setselling] = useState(
+    props.location.pathname.split("/")[2] === "Selling" ? true : false
+  );
+  const [employeeCollaps, setEmployees] = useState(
+    props.location.pathname.split("/")[2] === "Employees" ? true : false
+  );
+  const NevigationArray = [
+    { iconName: <Dashboard32 />, name: "Dashboard", url: routes.dashboard },
+    { iconName: <ChartRadar32 />, name: "Rough", url: routes.rough },
+    { iconName: <Portfolio32 />, name: "Office", url: routes.office },
+    { iconName: <Industry32 />, name: "Factory", url: routes.factory },
+    { iconName: <TextMining32 />, name: "Order Summary", url: routes.order },
+    {
+      dropdown: "yes",
+      iconName: <Report32 />,
+      name: "Report",
+      collaps: reportCollaps,
+      innerNevigation: [
+        { iconName: <HeatMap32 />, name: "Polish", url: routes.polishreport },
+        {
+          iconName: <DataRefinery32 />,
+          name: "Packet Status",
+          url: routes.packetreport,
+        },
+        { iconName: <Model32 />, name: "Total Cost", url: routes.costreport },
+      ],
+    },
+    {
+      dropdown: "yes",
+      iconName: <SaveModel32 />,
+      name: "Selling",
+      collaps: sellingCollaps,
+      innerNevigation: [
+        { iconName: <FlaggingTaxi32 />, name: "Seller", url: routes.seller },
+        {
+          iconName: <WatsonHealthCrossReference32 />,
+          name: "Buyer",
+          url: routes.buyer,
+        },
+        { iconName: <UserProfileAlt32 />, name: "Broker", url: routes.broker },
+      ],
+    },
+    {
+      dropdown: "yes",
+      iconName: <Event32 />,
+      name: "Employees",
+      collaps: employeeCollaps,
+      innerNevigation: [
+        { iconName: <FlaggingTaxi32 />, name: "Seller", url: routes.seller },
+        {
+          iconName: <WatsonHealthCrossReference32 />,
+          name: "Buyer",
+          url: routes.buyer,
+        },
+        { iconName: <UserProfileAlt32 />, name: "Broker", url: routes.broker },
+      ],
+    },
+    { iconName: <Product32 />, name: "Cost Master", url: routes.costMaster },
+    { iconName: <Settings32 />, name: "Setting", url: routes.settingpage },
+  ];
+
+  const onCollapsClick = (name) => {
+    console.log("onCollapsClick -> name", props);
+    if (name === "Report") {
+      setReport(!reportCollaps);
+      console.log("r", reportCollaps);
+    } else if (name === "Selling") {
+      setselling(!sellingCollaps);
+      console.log("s", sellingCollaps);
+    } else {
+      setEmployees(!employeeCollaps);
+      console.log("e", employeeCollaps);
+    }
+  };
+
   return (
     <div className="container">
       <HeaderContainer
@@ -130,31 +153,59 @@ const Sidebar = (props) => {
                 expanded={isSideNavExpanded}
               >
                 <SideNavItems>
-                  {NevigationArray.map((value, id) => (
-                    <>
-                      {" "}
-                      {value.dropdown ? (
-                        <SideNavMenu
-                          renderIcon={value.iconName}
-                          title={value.name}
-                        >
-                          {value.innerNevigation.map((data) => (
-                            <Link to={data.url}>
-                              <SideNavLink renderIcon={data.iconName}>
-                                {data.name}
-                              </SideNavLink>
-                            </Link>
-                          ))}
-                        </SideNavMenu>
+                  <div>
+                    {NevigationArray.map((value) =>
+                      value.dropdown ? (
+                        <>
+                          <div
+                            className="sidebar_div_wrapper"
+                            onClick={() => onCollapsClick(value.name)}
+                          >
+                            {value.iconName}
+                            <p>{value.name}</p>
+                            <ChevronDown32
+                              className={`collaps-arrow ${
+                                value.collaps ? "collaps-up-arrow" : ""
+                              }`}
+                            />
+                          </div>
+                          {value.collaps === true
+                            ? value.innerNevigation.map((data) => (
+                                <Link
+                                  to={data.url + `/${value.name}`}
+                                  // onClick={() => onLinkClick(value.name)}
+                                >
+                                  <div
+                                    className={`sidebar_div_wrapper sub-menu-side-bar ${
+                                      props.match.path === data.url
+                                        ? "activate-menu"
+                                        : ""
+                                    }`}
+                                  >
+                                    {/* <HeatMap32 /> */}
+                                    {data.iconName}
+                                    <p>{data.name}</p>
+                                  </div>
+                                </Link>
+                              ))
+                            : ""}
+                        </>
                       ) : (
                         <Link to={value.url}>
-                          <SideNavLink renderIcon={value.iconName}>
-                            {value.name}
-                          </SideNavLink>
+                          <div
+                            className={`sidebar_div_wrapper ${
+                              props.match.path === value.url
+                                ? "activate-menu"
+                                : ""
+                            }`}
+                          >
+                            {value.iconName}
+                            <p>{value.name}</p>
+                          </div>
                         </Link>
-                      )}
-                    </>
-                  ))}
+                      )
+                    )}
+                  </div>
                 </SideNavItems>
               </SideNav>
             </Header>
@@ -162,7 +213,13 @@ const Sidebar = (props) => {
               <div className="bx--grid">
                 <div className="bx--row">
                   <section className="bx--offset-lg-3 bx--col-lg-13 sidebar-content">
-                    {props.children}
+                    <div>
+                      <PageTopSection
+                        title={props.title}
+                        button={props.button}
+                      />
+                      {props.children}
+                    </div>
                   </section>
                 </div>
               </div>
