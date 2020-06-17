@@ -148,66 +148,6 @@ const Sidebar = (props) => {
                   <AppSwitcher20 />
                 </HeaderGlobalAction>
               </HeaderGlobalBar>
-              <SideNav
-                aria-label="Side navigation"
-                expanded={isSideNavExpanded}
-              >
-                <SideNavItems>
-                  <div>
-                    {NevigationArray.map((value) =>
-                      value.dropdown ? (
-                        <>
-                          <div
-                            className="sidebar_div_wrapper"
-                            onClick={() => onCollapsClick(value.name)}
-                          >
-                            {value.iconName}
-                            <p>{value.name}</p>
-                            <ChevronDown32
-                              className={`collaps-arrow ${
-                                value.collaps ? "collaps-up-arrow" : ""
-                              }`}
-                            />
-                          </div>
-                          {value.collaps === true
-                            ? value.innerNevigation.map((data) => (
-                                <Link
-                                  to={data.url + `/${value.name}`}
-                                  // onClick={() => onLinkClick(value.name)}
-                                >
-                                  <div
-                                    className={`sidebar_div_wrapper sub-menu-side-bar ${
-                                      props.match.path === data.url
-                                        ? "activate-menu"
-                                        : ""
-                                    }`}
-                                  >
-                                    {/* <HeatMap32 /> */}
-                                    {data.iconName}
-                                    <p>{data.name}</p>
-                                  </div>
-                                </Link>
-                              ))
-                            : ""}
-                        </>
-                      ) : (
-                        <Link to={value.url}>
-                          <div
-                            className={`sidebar_div_wrapper ${
-                              props.match.path === value.url
-                                ? "activate-menu"
-                                : ""
-                            }`}
-                          >
-                            {value.iconName}
-                            <p>{value.name}</p>
-                          </div>
-                        </Link>
-                      )
-                    )}
-                  </div>
-                </SideNavItems>
-              </SideNav>
             </Header>
             <Content id="main-content">
               <div className="bx--grid">
@@ -217,6 +157,8 @@ const Sidebar = (props) => {
                       <PageTopSection
                         title={props.title}
                         button={props.button}
+                        onClick={props.onClick}
+                        handelAddData={props.addButtonFunction}
                       />
                       {props.children}
                     </div>
@@ -224,6 +166,63 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </Content>
+            <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
+              <SideNavItems>
+                <div>
+                  {NevigationArray.map((value) =>
+                    value.dropdown ? (
+                      <>
+                        <div
+                          className="sidebar_div_wrapper"
+                          onClick={() => onCollapsClick(value.name)}
+                        >
+                          {value.iconName}
+                          <p>{value.name}</p>
+                          <ChevronDown32
+                            className={`collaps-arrow ${
+                              value.collaps ? "collaps-up-arrow" : ""
+                            }`}
+                          />
+                        </div>
+                        {value.collaps === true
+                          ? value.innerNevigation.map((data) => (
+                              <Link
+                                to={data.url + `/${value.name}`}
+                                // onClick={() => onLinkClick(value.name)}
+                              >
+                                <div
+                                  className={`sidebar_div_wrapper sub-menu-side-bar ${
+                                    props.match.path === data.url
+                                      ? "activate-menu"
+                                      : ""
+                                  }`}
+                                >
+                                  {/* <HeatMap32 /> */}
+                                  {data.iconName}
+                                  <p>{data.name}</p>
+                                </div>
+                              </Link>
+                            ))
+                          : ""}
+                      </>
+                    ) : (
+                      <Link to={value.url}>
+                        <div
+                          className={`sidebar_div_wrapper ${
+                            props.match.path === value.url
+                              ? "activate-menu"
+                              : ""
+                          }`}
+                        >
+                          {value.iconName}
+                          <p>{value.name}</p>
+                        </div>
+                      </Link>
+                    )
+                  )}
+                </div>
+              </SideNavItems>
+            </SideNav>
           </>
         )}
       />

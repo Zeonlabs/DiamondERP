@@ -6,6 +6,7 @@ import Store from "./Store/Store";
 // import "../scss/style.scss";
 import "./Scss/index.scss";
 import App from "./App";
+// import * as serviceWorker from "../public/service-Worker";
 
 ReactDOM.render(
   <Provider store={Store}>
@@ -13,3 +14,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
+// serviceWorker.register();
