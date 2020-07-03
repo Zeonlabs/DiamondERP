@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Sidebar from "../Common/Sidebar";
 import Model from "../Common/Model";
 import AddRoughModal from "./AddRoughModal";
+import AssignRough from "./AssignRough";
+import RoughSorting from "./RoughSorting";
 
 class RoughIndex extends Component {
   constructor(props) {
@@ -33,9 +35,21 @@ class RoughIndex extends Component {
 
   render() {
     const tabArray = [
-      { id: "1", lebal: "Add Rough", tabContent: <AddRoughModal /> },
-      { id: "2", lebal: "Sorting Rough", tabContent: <AddRoughModal /> },
-      { id: "3", lebal: "Assign Rough", tabContent: <AddRoughModal /> },
+      {
+        id: "1",
+        lebal: "Add Rough",
+        tabContent: <AddRoughModal close={this.closeModal} />,
+      },
+      {
+        id: "2",
+        lebal: "Sorting Rough",
+        tabContent: <AssignRough close={this.closeModal} />,
+      },
+      {
+        id: "3",
+        lebal: "Assign Rough",
+        tabContent: <RoughSorting close={this.closeModal} />,
+      },
     ];
     return (
       <Sidebar

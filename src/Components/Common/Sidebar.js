@@ -154,12 +154,16 @@ const Sidebar = (props) => {
                 <div className="bx--row">
                   <section className="bx--offset-lg-3 bx--col-lg-13 sidebar-content">
                     <div>
-                      <PageTopSection
-                        title={props.title}
-                        button={props.button}
-                        onClick={props.onClick}
-                        handelAddData={props.addButtonFunction}
-                      />
+                      {props.table === "no" ? (
+                        ""
+                      ) : (
+                        <PageTopSection
+                          title={props.title}
+                          button={props.button}
+                          onClick={props.onClick}
+                          handelAddData={props.addButtonFunction}
+                        />
+                      )}
                       {props.children}
                     </div>
                   </section>

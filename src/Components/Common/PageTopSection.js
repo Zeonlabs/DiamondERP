@@ -18,6 +18,7 @@ import {
   TableBody,
   // TableSelectRow,
   TableCell,
+  Pagination,
 } from "carbon-components-react";
 import { Add24, View24 } from "@carbon/icons-react";
 // import {
@@ -26,7 +27,6 @@ import { Add24, View24 } from "@carbon/icons-react";
 //   FilterEdit24,
 //   Settings24,
 // } from "@carbon/icons-react";
-
 class PageTopSection extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +52,146 @@ class PageTopSection extends Component {
           rule: "Round robin",
           status: "Starting",
           btn: 2,
+        },
+        {
+          attached_groups: "Andrews VM Groups",
+          id: 3,
+          name: "Load Balancer 2",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 3,
+        },
+        {
+          attached_groups: "Marcs VM Groups",
+          id: 4,
+          name: "Load Balancer 6",
+          port: 3000,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Disabled",
+          btn: 4,
+        },
+        {
+          attached_groups: "Mels VM Groups",
+          id: 5,
+          name: "Load Balancer 4",
+          port: 443,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Starting",
+          btn: 5,
+        },
+        {
+          attached_groups: "Ronjas VM Groups",
+          id: 6,
+          name: "Load Balancer 5",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 6,
+        },
+        {
+          attached_groups: "Andrews VM Groups",
+          id: 3,
+          name: "Load Balancer 2",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 3,
+        },
+        {
+          attached_groups: "Marcs VM Groups",
+          id: 4,
+          name: "Load Balancer 6",
+          port: 3000,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Disabled",
+          btn: 4,
+        },
+        {
+          attached_groups: "Mels VM Groups",
+          id: 5,
+          name: "Load Balancer 4",
+          port: 443,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Starting",
+          btn: 5,
+        },
+        {
+          attached_groups: "Ronjas VM Groups",
+          id: 6,
+          name: "Load Balancer 5",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 6,
+        },
+        {
+          attached_groups: "Mels VM Groups",
+          id: 5,
+          name: "Load Balancer 4",
+          port: 443,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Starting",
+          btn: 5,
+        },
+        {
+          attached_groups: "Ronjas VM Groups",
+          id: 6,
+          name: "Load Balancer 5",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 6,
+        },
+        {
+          attached_groups: "Andrews VM Groups",
+          id: 3,
+          name: "Load Balancer 2",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 3,
+        },
+        {
+          attached_groups: "Marcs VM Groups",
+          id: 4,
+          name: "Load Balancer 6",
+          port: 3000,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Disabled",
+          btn: 4,
+        },
+        {
+          attached_groups: "Mels VM Groups",
+          id: 5,
+          name: "Load Balancer 4",
+          port: 443,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Starting",
+          btn: 5,
+        },
+        {
+          attached_groups: "Ronjas VM Groups",
+          id: 6,
+          name: "Load Balancer 5",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 6,
         },
         {
           attached_groups: "Andrews VM Groups",
@@ -124,8 +264,35 @@ class PageTopSection extends Component {
           key: "status",
         },
       ],
+      currentPage: 0,
+      dataPerPage: 10,
+      currentPageData: [],
     };
   }
+
+  componentDidMount = () => {
+    this.setState({
+      currentPage: 1,
+    });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log(
+      "PageTopSection -> componentDidUpdate -> prevState.currentPage",
+      prevState.currentPage
+    );
+    if (prevState.currentPage !== this.state.currentPage) {
+      const username = this.state.rowData || [];
+      const { currentPage, dataPerPage } = this.state;
+      const indexOfLastTodo = currentPage * dataPerPage;
+      const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
+      const currentPageData = username.slice(indexOfFirstTodo, indexOfLastTodo);
+      this.setState({
+        currentPageData,
+      });
+      console.log("this ia a s array data", currentPageData);
+    }
+  };
 
   handelViewButton = (id) => {
     console.log("PageTopSection -> handelViewButton -> id", id);
@@ -136,11 +303,43 @@ class PageTopSection extends Component {
     console.log("button press", singleData);
   };
 
+  itemRangeText = (min, max, total) => {
+    console.log("min", min, "max", max, "ottal", total);
+    // this.setState({
+    //   currentPage: min,
+    // });
+  };
+
+  itemText = (min, max) => {
+    console.log("itemText ->", "min", min, "max", max);
+  };
+
+  onChange = (e) => {
+    console.log("PageTopSection -> onChange -> e", e);
+    this.setState({
+      currentPage: e.page,
+    });
+  };
+
+  pageRangeText = (current, total) => {
+    console.log(
+      "pageRangeText->itemText ->",
+      "current",
+      current,
+      "total",
+      total
+    );
+  };
+
+  pageText = (page) => {
+    console.log("PageTopSection -> pageText -> page", page);
+  };
+
   render() {
     return (
       <div className="pagetop-wrapper">
         <DataTable
-          rows={this.state.rowData}
+          rows={this.state.currentPageData}
           headers={this.state.headerData}
           size="compact"
           render={({
@@ -153,7 +352,7 @@ class PageTopSection extends Component {
             onInputChange,
             selectedRows,
           }) => (
-            <TableContainer title="DataTable with batch actions">
+            <TableContainer title={this.props.title}>
               <TableToolbar>
                 {/* <TableBatchAction {...getBatchActionProps()}>
             <TableBatchAction
@@ -211,7 +410,7 @@ class PageTopSection extends Component {
                     kind="primary"
                     className="add-data-button"
                   >
-                    Add new
+                    {this.props.button}
                     <Add24 />
                   </Button>
                 </TableToolbarContent>
@@ -250,6 +449,31 @@ class PageTopSection extends Component {
             </TableContainer>
           )}
         />
+        <div
+          style={{
+            maxWidth: "800px",
+          }}
+        >
+          <Pagination
+            backwardText="Previous page"
+            disabled={false}
+            forwardText="Next page"
+            isLastPage={false}
+            itemRangeText={this.itemRangeText}
+            itemText={this.itemText}
+            itemsPerPageText="Items per page:"
+            onChange={this.onChange}
+            page={1}
+            pageInputDisabled={false}
+            pageNumberText="Page Number"
+            pageRangeText={this.pageRangeText}
+            pageSize={10}
+            pageSizes={[10]}
+            pageText={this.pageText}
+            pagesUnknown={false}
+            totalItems={this.state.rowData.length}
+          />
+        </div>
       </div>
     );
   }

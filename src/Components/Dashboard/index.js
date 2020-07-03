@@ -10,7 +10,7 @@ class DashboardIndex extends Component {
 
   render() {
     return (
-      <Sidebar>
+      <Sidebar table="no">
         <div>Dashboards</div>
       </Sidebar>
     );

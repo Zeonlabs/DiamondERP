@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form } from "carbon-components-react";
+import { Form, Dropdown } from "carbon-components-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import TextField, { DateSelection } from "../Common/CommonComponents";
@@ -7,14 +7,13 @@ import TextField, { DateSelection } from "../Common/CommonComponents";
 // import TabView from "../Common/Tabs";
 
 const validationSchema = Yup.object().shape({
-  sallerName: Yup.string().required("*saller Name is required"),
-  brokerName: Yup.string().required("*broker Name is required"),
+  workPlace: Yup.string().required("*Work place is required"),
+  assignName: Yup.string().required("*Assign Name is required"),
   carat: Yup.string().required("*carat is required"),
   rate: Yup.string().required("*rate is required"),
-  purchaseDate: Yup.string().required("*purchas date is required"),
-  paymentDays: Yup.string().required("*payment days is required"),
+  piece: Yup.string().required("*purchas date is required"),
 });
-class AddRoughModal extends Component {
+class AssignRough extends Component {
   constructor(props) {
     super(props);
 
@@ -37,12 +36,11 @@ class AddRoughModal extends Component {
       <div style={{ marginBottom: "15%" }}>
         <Formik
           initialValues={{
-            sallerName: "",
-            brokerName: "",
+            workPlace: "",
+            assignName: "",
             carat: "",
             rate: "",
-            purchaseDate: "",
-            paymentDays: "",
+            piece: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -69,64 +67,90 @@ class AddRoughModal extends Component {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <h5 className="h5-form-label">
-                Rough Id : <span style={{ color: "#0F61FD" }}>#RID001</span>
-              </h5>
+              <div className="assign-headding-wrapper">
+                <h5 className="h5-form-label">
+                  Rough Id : <span style={{ color: "#0F61FD" }}>#RID001</span>
+                </h5>
+                <h5 className="h5-form-label">
+                  Assign Id : <span style={{ color: "#0F61FD" }}>#AID001</span>
+                </h5>
+                <h5 className="h5-form-label">
+                  Total Carat : <span style={{ color: "#0F61FD" }}>650.00</span>
+                </h5>
+              </div>
               <div className="bx--row">
-                <div className="bx--col-md-3">
-                  <TextField
+                <div className="bx--col-md-4">
+                  <Dropdown
+                    ariaLabel="Dropdown"
                     className={
-                      touched.sallerName && errors.sallerName
+                      touched.workPlace && errors.workPlace
                         ? "error"
                         : "bx--col"
                     }
-                    value={values.sallerName}
-                    name="sallerName"
-                    id="seller-name"
-                    // invalid={false}
-                    invalidText="Please fill"
-                    labelText="Saller Name :"
-                    placeholder="type Saller name here"
-                    light={true}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    // onClick={function noRefCheck() {}}
-                    required
-                    type="text"
+                    name="workPlace"
+                    direction="bottom"
+                    selectedItem={values.workPlace}
+                    value={values.workPlace}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="carbon-dropdown-example"
+                    items={[
+                      "Option 1",
+                      "Option 2",
+                      "Option 3",
+                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
+                      "Option 5",
+                      "Option 6",
+                    ]}
+                    label="Select work place"
+                    light
+                    onChange={(select) =>
+                      setFieldValue("workPlace", select.selectedItem)
+                    }
+                    titleText="Work Place"
+                    type="default"
                   />
-                  {touched.sallerName && errors.sallerName ? (
-                    <div className="error-message">{errors.sallerName}</div>
+                  {touched.workPlace && errors.workPlace ? (
+                    <div className="error-message">{errors.workPlace}</div>
                   ) : null}
                 </div>
-                <div className="bx--col-md-3">
-                  <TextField
+                <div className="bx--col-md-4">
+                  <Dropdown
+                    ariaLabel="Dropdown"
                     className={
-                      touched.brokerName && errors.brokerName
+                      touched.assignName && errors.assignName
                         ? "error"
                         : "bx--col"
                     }
-                    name="brokerName"
-                    value={values.brokerName}
-                    id="broker-name"
-                    placeholder="Type Broker Name here"
-                    // invalid={false}
-                    invalidText="Please fill"
-                    labelText="Broker Name :"
-                    light={true}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    // onClick={function noRefCheck() {}}
-                    required
-                    type="text"
+                    name="assignName"
+                    direction="bottom"
+                    selectedItem={values.assignName}
+                    value={values.assignName}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="rough-assignee-name"
+                    items={[
+                      "Option 1",
+                      "Option 2",
+                      "Option 3",
+                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
+                      "Option 5",
+                      "Option 6",
+                    ]}
+                    label="Select employee name"
+                    light
+                    onChange={(select) =>
+                      setFieldValue("assignName", select.selectedItem)
+                    }
+                    titleText="Assign to Person"
+                    type="default"
                   />
-                  {touched.brokerName && errors.brokerName ? (
-                    <div className="error-message">{errors.brokerName}</div>
+                  {touched.assignName && errors.assignName ? (
+                    <div className="error-message">{errors.assignName}</div>
                   ) : null}
                 </div>
                 {/* <div className="bx--col-md-3"></div> */}
               </div>
               <div className="bx--row top-margin-model-input">
-                <div className="bx--col-md-3">
+                <div className="bx--col-md-4">
                   <TextField
                     className={
                       touched.carat && errors.carat ? "error" : "bx--col"
@@ -149,7 +173,7 @@ class AddRoughModal extends Component {
                     <div className="error-message">{errors.carat}</div>
                   ) : null}
                 </div>
-                <div className="bx--col-md-3">
+                <div className="bx--col-md-4">
                   <TextField
                     className={
                       touched.rate && errors.rate ? "error" : "bx--col"
@@ -172,54 +196,20 @@ class AddRoughModal extends Component {
                     <div className="error-message">{errors.rate}</div>
                   ) : null}
                 </div>
-                <p style={{ display: "grid" }}>
-                  Total Amount :{" "}
-                  <span style={{ color: "#0D9F37" }}>000000</span>
-                </p>
               </div>
               <div className="bx--row top-margin-model-input">
-                <div className="bx--col-md-3">
-                  <DateSelection
-                    dateFormat="d/m/Y"
-                    datePickerType="single"
-                    onChange={(date) => {
-                      const basicDate = new Date(date);
-                      const formateDate =
-                        basicDate.getDate() +
-                        "/" +
-                        (basicDate.getMonth() + 1) +
-                        "/" +
-                        basicDate.getFullYear();
-                      setFieldValue("purchaseDate", formateDate);
-                    }}
-                    id="rough-purchase-date"
-                    placeholder="dd/mm/yyyy"
-                    labelText="Purchase Date"
-                    className={
-                      touched.rate && errors.rate ? "error" : "bx--col"
-                    }
-                    name="purchaseDate"
-                    value={values.purchaseDate}
-                    onBlur={handleBlur}
-                  />
-                  {touched.purchaseDate && errors.purchaseDate ? (
-                    <div className="error-message">{errors.purchaseDate}</div>
-                  ) : null}
-                </div>
-                <div className="bx--col-md-3">
+                <div className="bx--col-md-4">
                   <TextField
                     className={
-                      touched.paymentDays && errors.paymentDays
-                        ? "error"
-                        : "bx--col"
+                      touched.piece && errors.piece ? "error" : "bx--col"
                     }
-                    name="paymentDays"
-                    value={values.paymentDays}
-                    id="rough-payment-days"
-                    placeholder="Enter total payment days"
+                    name="piece"
+                    value={values.piece}
+                    id="rough-piece"
+                    placeholder="enter amount here"
                     // invalid={false}
                     invalidText="Please fill"
-                    labelText="Payment Days :"
+                    labelText="piece :"
                     light={true}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -227,15 +217,25 @@ class AddRoughModal extends Component {
                     required
                     type="number"
                   />
-                  {touched.paymentDays && errors.paymentDays ? (
-                    <div className="error-message">{errors.paymentDays}</div>
+                  {touched.piece && errors.piece ? (
+                    <div className="error-message">{errors.piece}</div>
                   ) : null}
                 </div>
-                {/* <div className="bx--col-md-2"> */}
-                <p style={{ display: "grid" }}>
-                  Due Date :{" "}
-                  <span style={{ color: "#DA1E28" }}>00/00/2020</span>
-                </p>
+                <div className="bx--col-md-2">
+                  <p style={{ display: "grid", marginTop: "6%" }}>
+                    Total Amount :{" "}
+                    <span style={{ color: "#0D9F37" }}>000000</span>
+                  </p>
+                </div>
+                <div className="bx--col-md-2">
+                  {/*               
+                <div className="bx--col-md-3"> */}
+                  <p style={{ display: "grid", marginTop: "6%" }}>
+                    Remaining Carat :{" "}
+                    <span style={{ color: "#FF3D00" }}>5.56</span>
+                  </p>
+                </div>
+                {/* </div> */}
               </div>
               <div className="bx--modal-footer modal-custome-footer">
                 <button
@@ -263,4 +263,4 @@ class AddRoughModal extends Component {
   }
 }
 
-export default AddRoughModal;
+export default AssignRough;

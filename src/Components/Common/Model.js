@@ -10,16 +10,16 @@ class Model extends Component {
   }
 
   render() {
-    console.log("props in modal", this.props);
+    // console.log("props in modal", this.props);
     return (
       <div>
         <Modal
           open={this.props.open}
           hasForm
+          className={`modal-wrapper ${this.props.className}`}
+          passiveModal
           modalHeading="Add Rough"
           onRequestClose={this.props.close}
-          primaryButtonText="Save"
-          secondaryButtonText="Close"
           // selectorPrimaryFocus
         >
           <TabView tabContent={this.props.tabContent} />

@@ -7,7 +7,7 @@ const url = require("url");
 const isDev = require("electron-is-dev");
 
 require("update-electron-app")({
-  repo: "Zeonlabs/gaushala-software.git",
+  repo: "Zeonlabs/DiamondERP.git",
 });
 
 //start server
