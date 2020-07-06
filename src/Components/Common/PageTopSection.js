@@ -19,8 +19,10 @@ import {
   // TableSelectRow,
   TableCell,
   Pagination,
+  // OverflowMenu,
+  // OverflowMenuItem,
 } from "carbon-components-react";
-import { Add24, View24 } from "@carbon/icons-react";
+import { Add24, Edit20, Delete20, View20 } from "@carbon/icons-react";
 // import {
 //   Add20,
 //   ListDropdown24,
@@ -35,17 +37,20 @@ class PageTopSection extends Component {
       rowData: [
         {
           attached_groups: "Kevins VM Groups",
-          id: 1,
+          id: "1",
+          key: 1,
           name: "Load Balancer 3",
           port: 3000,
           protocol: "HTTP",
           rule: "Round robin",
           status: "Disabled",
           btn: 1,
+          isEditable: true,
         },
         {
           attached_groups: "Maureens VM Groups",
-          id: 2,
+          id: "2",
+          key: 2,
           name: "Load Balancer 1",
           port: 443,
           protocol: "HTTP",
@@ -55,7 +60,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Andrews VM Groups",
-          id: 3,
+          id: "3",
+          key: 3,
           name: "Load Balancer 2",
           port: 80,
           protocol: "HTTP",
@@ -65,7 +71,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Marcs VM Groups",
-          id: 4,
+          id: "4",
+          key: 4,
           name: "Load Balancer 6",
           port: 3000,
           protocol: "HTTP",
@@ -75,7 +82,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Mels VM Groups",
-          id: 5,
+          id: "5",
+          key: 5,
           name: "Load Balancer 4",
           port: 443,
           protocol: "HTTP",
@@ -85,7 +93,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Ronjas VM Groups",
-          id: 6,
+          id: "6",
+          key: 6,
           name: "Load Balancer 5",
           port: 80,
           protocol: "HTTP",
@@ -95,7 +104,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Andrews VM Groups",
-          id: 3,
+          id: "7",
+          key: 7,
           name: "Load Balancer 2",
           port: 80,
           protocol: "HTTP",
@@ -105,7 +115,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Marcs VM Groups",
-          id: 4,
+          id: "8",
+          key: 8,
           name: "Load Balancer 6",
           port: 3000,
           protocol: "HTTP",
@@ -115,7 +126,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Mels VM Groups",
-          id: 5,
+          id: "9",
+          key: 9,
           name: "Load Balancer 4",
           port: 443,
           protocol: "HTTP",
@@ -125,7 +137,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Ronjas VM Groups",
-          id: 6,
+          id: "10",
+          key: 10,
           name: "Load Balancer 5",
           port: 80,
           protocol: "HTTP",
@@ -135,7 +148,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Mels VM Groups",
-          id: 5,
+          id: "11",
+          key: 11,
           name: "Load Balancer 4",
           port: 443,
           protocol: "HTTP",
@@ -145,47 +159,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Ronjas VM Groups",
-          id: 6,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-        {
-          attached_groups: "Andrews VM Groups",
-          id: 3,
-          name: "Load Balancer 2",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 3,
-        },
-        {
-          attached_groups: "Marcs VM Groups",
-          id: 4,
-          name: "Load Balancer 6",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 4,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: 5,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: 6,
+          id: "12",
+          key: 12,
           name: "Load Balancer 5",
           port: 80,
           protocol: "HTTP",
@@ -195,7 +170,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Andrews VM Groups",
-          id: 3,
+          id: "13",
+          key: 13,
           name: "Load Balancer 2",
           port: 80,
           protocol: "HTTP",
@@ -205,7 +181,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Marcs VM Groups",
-          id: 4,
+          id: "14",
+          key: 14,
           name: "Load Balancer 6",
           port: 3000,
           protocol: "HTTP",
@@ -215,7 +192,8 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Mels VM Groups",
-          id: 5,
+          id: "15",
+          key: 15,
           name: "Load Balancer 4",
           port: 443,
           protocol: "HTTP",
@@ -225,7 +203,52 @@ class PageTopSection extends Component {
         },
         {
           attached_groups: "Ronjas VM Groups",
-          id: 6,
+          id: "16",
+          key: 16,
+          name: "Load Balancer 5",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 6,
+        },
+        {
+          attached_groups: "Andrews VM Groups",
+          id: "17",
+          key: 17,
+          name: "Load Balancer 2",
+          port: 80,
+          protocol: "HTTP",
+          rule: "DNS delegation",
+          status: "Active",
+          btn: 3,
+        },
+        {
+          attached_groups: "Marcs VM Groups",
+          id: "18",
+          key: 18,
+          name: "Load Balancer 6",
+          port: 3000,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Disabled",
+          btn: 4,
+        },
+        {
+          attached_groups: "Mels VM Groups",
+          id: "19",
+          key: 19,
+          name: "Load Balancer 4",
+          port: 443,
+          protocol: "HTTP",
+          rule: "Round robin",
+          status: "Starting",
+          btn: 5,
+        },
+        {
+          attached_groups: "Ronjas VM Groups",
+          id: "20",
+          key: 20,
           name: "Load Balancer 5",
           port: 80,
           protocol: "HTTP",
@@ -238,30 +261,42 @@ class PageTopSection extends Component {
         {
           header: "View",
           key: "id",
+          size: "20px",
         },
         {
           header: "Name",
           key: "name",
+          size: "200px",
         },
         {
           header: "Protocol",
           key: "protocol",
+          size: "50px",
         },
         {
           header: "Port",
           key: "port",
+          size: "50px",
         },
         {
           header: "Rule",
           key: "rule",
+          size: "155px",
         },
         {
           header: "Attached Groups",
           key: "attached_groups",
+          size: "200px",
         },
         {
           header: "Status",
           key: "status",
+          size: "100px",
+        },
+        {
+          header: "Action",
+          key: "btn",
+          size: "100px",
         },
       ],
       currentPage: 0,
@@ -294,13 +329,28 @@ class PageTopSection extends Component {
     }
   };
 
-  handelViewButton = (id) => {
-    console.log("PageTopSection -> handelViewButton -> id", id);
+  handelOnEditClick = (id) => {
+    // console.log("PageTopSection -> handelViewButton -> id", id);
     const split = id.split(":");
-    const singleData = this.state.rowData.find(
-      (data) => data.id === parseInt(split[0])
-    );
-    console.log("button press", singleData);
+    // console.log("PageTopSection -> handelViewButton -> split", split);
+    const singleData = this.state.rowData.find((data) => data.id === split[0]);
+    console.log("edit button press", singleData);
+  };
+
+  handelOnDeleteClick = (id) => {
+    // console.log("PageTopSection -> handelViewButton -> id", id);
+    const split = id.split(":");
+    // console.log("PageTopSection -> handelViewButton -> split", split);
+    const singleData = this.state.rowData.find((data) => data.id === split[0]);
+    console.log("delete button press", singleData);
+  };
+
+  handelViewButton = (id) => {
+    // console.log("PageTopSection -> handelViewButton -> id", id);
+    const split = id.split(":");
+    // console.log("PageTopSection -> handelViewButton -> split", split);
+    const singleData = this.state.rowData.find((data) => data.id === split[0]);
+    console.log("View button press", singleData);
   };
 
   itemRangeText = (min, max, total) => {
@@ -341,7 +391,8 @@ class PageTopSection extends Component {
         <DataTable
           rows={this.state.currentPageData}
           headers={this.state.headerData}
-          size="compact"
+          // size="short"
+          overflowMenuOnHover={false}
           render={({
             rows,
             headers,
@@ -415,44 +466,71 @@ class PageTopSection extends Component {
                   </Button>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {/* <TableSelectAll {...getSelectionProps()} /> */}
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
-                        {header.header}
-                      </TableHeader>
+              <div className="table-wrapper">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      {/* <TableSelectAll {...getSelectionProps()} /> */}
+                      {headers.map((header) => (
+                        // console.log("PageTopSection -> header", header)
+                        <TableHeader
+                          {...getHeaderProps({ header })}
+                          style={{ width: `${header.size}` }}
+                        >
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <>
+                        <TableRow {...getRowProps({ row })}>
+                          {row.cells.map((cell) =>
+                            cell.info.header === "btn" ? (
+                              <TableCell key={cell.id}>
+                                <div className="action-wrapper">
+                                  <Edit20
+                                    className="edit-in-table"
+                                    onClick={() =>
+                                      this.handelOnEditClick(cell.id)
+                                    }
+                                  />
+                                  <div className="devider"></div>
+                                  <Delete20
+                                    className="delete-in-table"
+                                    onClick={() =>
+                                      this.handelOnDeleteClick(cell.id)
+                                    }
+                                  />
+                                </div>
+                              </TableCell>
+                            ) : cell.info.header === "id" ? (
+                              <TableCell key={cell.id}>
+                                <View20
+                                  onClick={() => this.handelViewButton(cell.id)}
+                                />
+                              </TableCell>
+                            ) : (
+                              // console.log("PageTopSection -> cell", cell)
+                              <TableCell key={cell.id}>{cell.value}</TableCell>
+                            )
+                          )}
+                        </TableRow>
+                      </>
                     ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <>
-                      <TableRow {...getRowProps({ row })}>
-                        {row.cells.map((cell) =>
-                          cell.info.header === "id" ? (
-                            <TableCell key={cell.id}>
-                              <View24
-                                onClick={() => this.handelViewButton(cell.id)}
-                              />
-                            </TableCell>
-                          ) : (
-                            <TableCell key={cell.id}>{cell.value}</TableCell>
-                          )
-                        )}
-                      </TableRow>
-                    </>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableBody>
+                </Table>
+              </div>
             </TableContainer>
           )}
         />
         <div
-          style={{
-            maxWidth: "800px",
-          }}
+          style={
+            {
+              // maxWidth: "800px",
+            }
+          }
         >
           <Pagination
             backwardText="Previous page"

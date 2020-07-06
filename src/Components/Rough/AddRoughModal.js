@@ -198,6 +198,7 @@ class AddRoughModal extends Component {
                     className={
                       touched.rate && errors.rate ? "error" : "bx--col"
                     }
+                    dateid="rough-purchas-date"
                     name="purchaseDate"
                     value={values.purchaseDate}
                     onBlur={handleBlur}

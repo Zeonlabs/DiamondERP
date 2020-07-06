@@ -35,6 +35,7 @@ export const DateSelection = (props) => {
       dateFormat={props.dateFormat}
       datePickerType={props.datePickerType}
       light
+      id={props.dateid}
       style={{ width: "100%" }}
       onChange={props.onChange}
     >

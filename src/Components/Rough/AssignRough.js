@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Dropdown } from "carbon-components-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import TextField, { DateSelection } from "../Common/CommonComponents";
+import TextField from "../Common/CommonComponents";
 // import { Tab } from "carbon-components-react";
 // import TabView from "../Common/Tabs";
 
@@ -11,7 +11,7 @@ const validationSchema = Yup.object().shape({
   assignName: Yup.string().required("*Assign Name is required"),
   carat: Yup.string().required("*carat is required"),
   rate: Yup.string().required("*rate is required"),
-  piece: Yup.string().required("*purchas date is required"),
+  piece: Yup.string().required("*piece is required"),
 });
 class AssignRough extends Component {
   constructor(props) {
@@ -85,14 +85,14 @@ class AssignRough extends Component {
                     className={
                       touched.workPlace && errors.workPlace
                         ? "error"
-                        : "bx--col"
+                        : "bx--col dropdown-padding"
                     }
                     name="workPlace"
                     direction="bottom"
                     selectedItem={values.workPlace}
                     value={values.workPlace}
                     // itemToString={(item) => (item ? item.text : "")}
-                    id="carbon-dropdown-example"
+                    id="rough-workplace"
                     items={[
                       "Option 1",
                       "Option 2",
@@ -100,11 +100,39 @@ class AssignRough extends Component {
                       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
                       "Option 5",
                       "Option 6",
+                      // {
+                      //   id: "option-0",
+                      //   text:
+                      //     "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
+                      // },
+                      // {
+                      //   id: "option-1",
+                      //   text: "Option 1",
+                      // },
+                      // {
+                      //   id: "option-2",
+                      //   text: "Option 2",
+                      // },
+                      // {
+                      //   id: "option-3",
+                      //   text: "Option 3",
+                      // },
+                      // {
+                      //   id: "option-4",
+                      //   text: "Option 4",
+                      // },
+                      // {
+                      //   id: "option-5",
+                      //   text: "Option 5",
+                      // },
                     ]}
                     label="Select work place"
                     light
-                    onChange={(select) =>
-                      setFieldValue("workPlace", select.selectedItem)
+                    onChange={
+                      (select) =>
+                        setFieldValue("workPlace", select.selectedItem)
+                      // setFieldValue("workPlace", select.selectedItem.text)
+                      // console.log("AssignRough -> select", select)
                     }
                     titleText="Work Place"
                     type="default"
@@ -119,7 +147,7 @@ class AssignRough extends Component {
                     className={
                       touched.assignName && errors.assignName
                         ? "error"
-                        : "bx--col"
+                        : "bx--col dropdown-padding"
                     }
                     name="assignName"
                     direction="bottom"
@@ -157,7 +185,7 @@ class AssignRough extends Component {
                     }
                     name="carat"
                     value={values.carat}
-                    id="rough-carat"
+                    id="rough-assign-carat"
                     // invalid={false}
                     invalidText="Please fill"
                     labelText="Carat :"
@@ -180,7 +208,7 @@ class AssignRough extends Component {
                     }
                     name="rate"
                     value={values.rate}
-                    id="rough-rate"
+                    id="rough-assign-rate"
                     placeholder="enter amount here"
                     // invalid={false}
                     invalidText="Please fill"
@@ -205,7 +233,7 @@ class AssignRough extends Component {
                     }
                     name="piece"
                     value={values.piece}
-                    id="rough-piece"
+                    id="rough-assign-piece"
                     placeholder="enter amount here"
                     // invalid={false}
                     invalidText="Please fill"

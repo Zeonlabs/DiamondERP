@@ -2,3 +2,32 @@
   display: flex;
   justify-content: space-between;
 }
+
+.dropdown-padding {
+  padding: 0px !important;
+}
+
+.sorting-table-wrapper {
+  table,
+  td,
+  th {
+    // border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+  }
+
+  th,
+  td {
+    padding: 15px;
+  }
+
+  .sorting-table-header {
+    background-color: #e0e0e0;
+    font-weight: bold;
+  }
+}

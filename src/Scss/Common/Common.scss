@@ -102,6 +102,32 @@ main-content,
   position: relative;
 }
 
+.action-wrapper {
+  display: flex;
+  justify-content: space-around;
+  .edit-in-table {
+    fill: green;
+    cursor: pointer;
+  }
+
+  .delete-in-table {
+    fill: red;
+    cursor: pointer;
+  }
+  .devider {
+    border-left: 1px solid silver;
+    margin: 0 16%;
+  }
+}
+
+.table-wrapper {
+  overflow-x: scroll;
+  width: 128vh;
+  .bx--data-table {
+    width: max-content !important;
+  }
+}
+
 .modal-custome-footer {
   position: absolute;
   width: 100%;

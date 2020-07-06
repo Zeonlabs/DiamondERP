@@ -43,12 +43,12 @@ class RoughIndex extends Component {
       {
         id: "2",
         lebal: "Sorting Rough",
-        tabContent: <AssignRough close={this.closeModal} />,
+        tabContent: <RoughSorting close={this.closeModal} />,
       },
       {
         id: "3",
         lebal: "Assign Rough",
-        tabContent: <RoughSorting close={this.closeModal} />,
+        tabContent: <AssignRough close={this.closeModal} />,
       },
     ];
     return (
