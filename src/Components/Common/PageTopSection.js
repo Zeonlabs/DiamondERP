@@ -286,13 +286,14 @@ class PageTopSection extends Component {
         {
           header: "Attached Groups",
           key: "attached_groups",
-          size: "200px",
+          size: "300px",
         },
         {
           header: "Status",
           key: "status",
           size: "100px",
         },
+
         {
           header: "Action",
           key: "btn",
@@ -508,6 +509,7 @@ class PageTopSection extends Component {
                             ) : cell.info.header === "id" ? (
                               <TableCell key={cell.id}>
                                 <View20
+                                  className="view-in-table"
                                   onClick={() => this.handelViewButton(cell.id)}
                                 />
                               </TableCell>

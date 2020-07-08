@@ -3,6 +3,7 @@ body {
   margin: 0px;
   font-family: "IBM Plex Sans";
   overflow: hidden;
+  transition: all 0.5s ease-in;
 }
 header {
   position: unset !important;
@@ -120,9 +121,13 @@ main-content,
   }
 }
 
+.view-in-table {
+  cursor: pointer;
+}
+
 .table-wrapper {
   overflow-x: scroll;
-  width: 128vh;
+  width: 100%;
   .bx--data-table {
     width: max-content !important;
   }

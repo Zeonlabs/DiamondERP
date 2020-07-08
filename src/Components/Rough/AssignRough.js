@@ -252,13 +252,15 @@ class AssignRough extends Component {
                 <div className="bx--col-md-2">
                   <p style={{ display: "grid", marginTop: "6%" }}>
                     Total Amount :{" "}
-                    <span style={{ color: "#0D9F37" }}>000000</span>
+                    <span style={{ color: "#0D9F37" }}>
+                      {values.carat * values.rate} /-
+                    </span>
                   </p>
                 </div>
                 <div className="bx--col-md-2">
                   {/*               
                 <div className="bx--col-md-3"> */}
-                  <p style={{ display: "grid", marginTop: "6%" }}>
+                  <p style={{ marginTop: "6%" }}>
                     Remaining Carat :{" "}
                     <span style={{ color: "#FF3D00" }}>5.56</span>
                   </p>

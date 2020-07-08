@@ -174,7 +174,9 @@ class AddRoughModal extends Component {
                 </div>
                 <p style={{ display: "grid" }}>
                   Total Amount :{" "}
-                  <span style={{ color: "#0D9F37" }}>000000</span>
+                  <span style={{ color: "#0D9F37" }}>
+                    {values.carat * values.rate} /-
+                  </span>
                 </p>
               </div>
               <div className="bx--row top-margin-model-input">
@@ -196,7 +198,9 @@ class AddRoughModal extends Component {
                     placeholder="dd/mm/yyyy"
                     labelText="Purchase Date"
                     className={
-                      touched.rate && errors.rate ? "error" : "bx--col"
+                      touched.purchaseDate && errors.purchaseDate
+                        ? "error"
+                        : "bx--col"
                     }
                     dateid="rough-purchas-date"
                     name="purchaseDate"

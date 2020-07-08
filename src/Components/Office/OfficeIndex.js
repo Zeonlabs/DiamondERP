@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Sidebar from "../Common/Sidebar";
 import CreateOfficePacket from "./CreateOfficePacket";
 import Model from "../Common/Model";
+import ReturnOfficePacket from "./ReturnPacket";
+import ReturnOfficeRough from "./ReturnOfficeRough";
 
 class OfficeIndex extends Component {
   constructor(props) {
@@ -27,9 +29,21 @@ class OfficeIndex extends Component {
 
   render() {
     const tabArray = [
-      { id: "1", lebal: "Add Rough", tabContent: <CreateOfficePacket /> },
-      { id: "2", lebal: "Sorting Rough", tabContent: <CreateOfficePacket /> },
-      { id: "3", lebal: "Assign Rough", tabContent: <CreateOfficePacket /> },
+      {
+        id: "1",
+        lebal: "Create Packet",
+        tabContent: <CreateOfficePacket close={this.closeModal} />,
+      },
+      {
+        id: "2",
+        lebal: "Return Packet",
+        tabContent: <ReturnOfficePacket close={this.closeModal} />,
+      },
+      {
+        id: "3",
+        lebal: "Return Rough",
+        tabContent: <ReturnOfficeRough close={this.closeModal} />,
+      },
     ];
     return (
       <Sidebar
@@ -39,6 +53,7 @@ class OfficeIndex extends Component {
         addButtonFunction={this.handelAddDataModal}
       >
         <Model
+          modalName="Office Packet Details"
           open={this.state.model}
           close={this.closeModal}
           tabContent={tabArray}

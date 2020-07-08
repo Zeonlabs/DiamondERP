@@ -23,11 +23,24 @@
 
   th,
   td {
-    padding: 15px;
+    padding: 8px;
+    width: 20%;
   }
 
   .sorting-table-header {
     background-color: #e0e0e0;
     font-weight: bold;
+  }
+
+  .sorting-table-input {
+    border: 0;
+    width: 100%;
+    transition: border 5s ease-in;
+  }
+  input {
+    &:focus {
+      outline: 0;
+      border-bottom: 1px black solid;
+    }
   }
 }

@@ -18,7 +18,7 @@ class Model extends Component {
           hasForm
           className={`modal-wrapper ${this.props.className}`}
           passiveModal
-          modalHeading="Add Rough"
+          modalHeading={this.props.modalName}
           onRequestClose={this.props.close}
           // selectorPrimaryFocus
         >

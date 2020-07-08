@@ -61,6 +61,7 @@ class RoughIndex extends Component {
         {/* {console.log("log in render")} */}
         {/* <h1>Hello Fuck</h1> */}
         <Model
+          modalName="Rough Details"
           open={this.state.model}
           close={this.closeModal}
           tabContent={tabArray}

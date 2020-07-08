@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import TextField from "../Common/CommonComponents";
 import SortigTable from "./SortigTable";
+import { sumObjValuses } from "../../js/Helper";
 // import { Tab } from "carbon-components-react";
 // import TabView from "../Common/Tabs";
 
@@ -18,7 +19,22 @@ class RoughSorting extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      sortingData: {
+        chockiCarat: "",
+        chockiPrice: "",
+        markisCarat: "",
+        markisPrice: "",
+        crystalCarat: "",
+        crystalPrice: "",
+        golCarat: "",
+        golPrice: "",
+        outCarat: "",
+        outPrice: "",
+      },
+      sumOfCarat: 0,
+      sumOfAmount: 0,
+    };
   }
 
   handelSubmit = (e) => {
@@ -26,11 +42,38 @@ class RoughSorting extends Component {
   };
 
   handelOnChange = (e) => {
-    console.log("AddRoughModal -> handelOnChange -> e", e.target);
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+    this.setState(
+      {
+        sortingData: {
+          ...this.state.sortingData,
+          [e.target.name]: parseFloat(e.target.value),
+        },
+      },
+      () => {
+        this.setState({
+          sumOfCarat:
+            this.state.sortingData.chockiCarat +
+            this.state.sortingData.markisCarat +
+            this.state.sortingData.crystalCarat +
+            this.state.sortingData.golCarat +
+            this.state.sortingData.outCarat,
+          sumOfAmount:
+            this.state.sortingData.chockiPrice *
+              this.state.sortingData.chockiCarat +
+            this.state.sortingData.markisPrice *
+              this.state.sortingData.markisCarat +
+            this.state.sortingData.crystalPrice *
+              this.state.sortingData.markisCarat +
+            this.state.sortingData.golPrice *
+              this.state.sortingData.markisCarat +
+            this.state.sortingData.outPrice *
+              this.state.sortingData.markisCarat,
+        });
+      }
+    );
   };
+
+  handelData = () => {};
 
   render() {
     return (
@@ -81,16 +124,23 @@ class RoughSorting extends Component {
               </div>
 
               <div>
-                <SortigTable />
+                <SortigTable
+                  handelOnChange={this.handelOnChange}
+                  value={this.state.sortingData}
+                />
               </div>
               <div className="assign-headding-wrapper">
                 <h5 className="h5-form-label">
                   Total Sorting Carat :{" "}
-                  <span style={{ color: "#DA1E28" }}>25.00</span>
+                  <span style={{ color: "#DA1E28" }}>
+                    {this.state.sumOfCarat}
+                  </span>
                 </h5>
                 <h5 className="h5-form-label">
                   Total Amount :{" "}
-                  <span style={{ color: "#0D9F37" }}>27,648 /-</span>
+                  <span style={{ color: "#0D9F37" }}>
+                    {this.state.sumOfAmount} /-
+                  </span>
                 </h5>
               </div>
               <div className="assign-headding-wrapper">

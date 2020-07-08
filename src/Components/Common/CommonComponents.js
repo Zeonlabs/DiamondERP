@@ -4,6 +4,7 @@ import {
   DatePicker,
   DatePickerInput,
   Dropdown,
+  ComboBox,
 } from "carbon-components-react";
 
 const TextField = (props) => {
@@ -56,20 +57,43 @@ export const DateSelection = (props) => {
 
 export const DropDownSelection = (props) => {
   return (
-    <Dropdown
-      // ariaLabel="Dropdown"
-      direction="bottom"
+    <ComboBox
+      ariaLabel="Dropdown"
+      direction={props.direction ? props.direction : "bottom"}
+      className={props.className}
+      name={props.name}
+      selectedItem={props.selectedItem}
+      value={props.value}
       // helperText="This is some helper text."
       id={props.id}
       // invalidText="A valid value is required"
       // itemToElement={null}
       // itemToString={function noRefCheck(){}}
       items={props.items}
-      label={props.label}
+      placeholder={props.label}
       light
       onChange={props.onChange}
       titleText={props.titleText}
       type="default"
     />
+    // <Dropdown
+    //   ariaLabel="Dropdown"
+    //   direction={props.direction ? props.direction : "bottom"}
+    //   className={props.className}
+    //   name={props.name}
+    //   selectedItem={props.selectedItem}
+    //   value={props.value}
+    //   // helperText="This is some helper text."
+    //   id={props.id}
+    //   // invalidText="A valid value is required"
+    //   // itemToElement={null}
+    //   // itemToString={function noRefCheck(){}}
+    //   items={props.items}
+    //   label={props.label}
+    //   light
+    //   onChange={props.onChange}
+    //   titleText={props.titleText}
+    //   type="default"
+    // />
   );
 };

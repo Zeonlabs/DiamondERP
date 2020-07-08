@@ -10,7 +10,7 @@ import TextField, {
 // import TabView from "../Common/Tabs";
 
 const validationSchema = Yup.object().shape({
-  assignId: Yup.string().required("*Assign Id is required"),
+  packetId: Yup.string().required("*Packet Id is required"),
   roughName: Yup.string().required("*Rough Name is required"),
   officecarat: Yup.string().required("*carat is required"),
   piece: Yup.string().required("*Piece is required"),
@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   assigneName: Yup.string().required("*Assign Name is required"),
   createDate: Yup.string().required("*Date is required"),
 });
-class CreateOfficePacket extends Component {
+class ReturnOfficePacket extends Component {
   constructor(props) {
     super(props);
 
@@ -29,19 +29,19 @@ class CreateOfficePacket extends Component {
     console.log(e);
   };
 
-  handelOnChange = (e) => {
-    console.log("AddRoughModal -> handelOnChange -> e", e.target);
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
+  // handelOnChange = (e) => {
+  //   console.log("AddRoughModal -> handelOnChange -> e", e.target);
+  //   this.setState({
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   render() {
     return (
       <div style={{ marginBottom: "15%" }}>
         <Formik
           initialValues={{
-            assignId: "",
+            packetId: "",
             roughName: "",
             officecarat: "",
             piece: "",
@@ -56,11 +56,11 @@ class CreateOfficePacket extends Component {
             console.log("AddRoughModal -> render -> values", values);
             this.props.close();
             // Simulate submitting to database, shows us values submitted, resets form
-            // setTimeout(() => {
-            //   // alert(JSON.stringify(values, null, 2));
-            //   resetForm();
-            //   setSubmitting(false);
-            // }, 500);
+            setTimeout(() => {
+              // alert(JSON.stringify(values, null, 2));
+              resetForm();
+              setSubmitting(false);
+            }, 500);
           }}
         >
           {({
@@ -74,9 +74,9 @@ class CreateOfficePacket extends Component {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <h5 className="h5-form-label">
+              {/* <h5 className="h5-form-label">
                 Packet Id : <span style={{ color: "#0F61FD" }}>#PID001</span>
-              </h5>
+              </h5> */}
               <div className="bx--row">
                 <div className="bx--col-md-3">
                   <DateSelection
@@ -92,7 +92,7 @@ class CreateOfficePacket extends Component {
                         basicDate.getFullYear();
                       setFieldValue("createDate", formateDate);
                     }}
-                    id="office-packet-create-date"
+                    id="retutn-office-packet-create-date"
                     placeholder="dd/mm/yyyy"
                     labelText="Create packet Date"
                     className={
@@ -100,7 +100,7 @@ class CreateOfficePacket extends Component {
                         ? "error"
                         : "bx--col"
                     }
-                    dateid="office-packet-id"
+                    dateid="return-office-packet-id"
                     name="createDate"
                     value={values.createDate}
                     onBlur={handleBlur}
@@ -112,15 +112,15 @@ class CreateOfficePacket extends Component {
                 <div className="bx--col-md-3">
                   <DropDownSelection
                     className={
-                      touched.assignId && errors.assignId
+                      touched.packetId && errors.packetId
                         ? "error"
                         : "bx--col dropdown-padding"
                     }
-                    name="assignId"
-                    selectedItem={values.assignId}
-                    value={values.assignId}
+                    name="packetId"
+                    selectedItem={values.packetId}
+                    value={values.packetId}
                     // itemToString={(item) => (item ? item.text : "")}
-                    id="rough-assignee-id"
+                    id="return-packet-id"
                     items={[
                       "Option 1",
                       "Option 2",
@@ -129,51 +129,18 @@ class CreateOfficePacket extends Component {
                       "Option 5",
                       "Option 6",
                     ]}
-                    label="Select Assign id"
+                    label="Select Packet id"
                     light
                     onChange={(select) =>
-                      setFieldValue("assignId", select.selectedItem)
+                      setFieldValue("packetId", select.selectedItem)
                     }
-                    titleText="Assign id"
+                    titleText="Packet id"
                     type="default"
                   />
-                  {touched.assignId && errors.assignId ? (
-                    <div className="error-message">{errors.assignId}</div>
+                  {touched.packetId && errors.packetId ? (
+                    <div className="error-message">{errors.packetId}</div>
                   ) : null}
                 </div>
-                <div className="bx--col-md-3">
-                  {/* <DropDownSelection
-                    className={
-                      touched.roughName && errors.roughName
-                        ? "error"
-                        : "bx--col dropdown-padding"
-                    }
-                    name="roughName"
-                    selectedItem={values.roughName}
-                    value={values.roughName}
-                    // itemToString={(item) => (item ? item.text : "")}
-                    id="rough-name-office"
-                    items={[
-                      "Option 1",
-                      "Option 2",
-                      "Option 3",
-                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
-                      "Option 5",
-                      "Option 6",
-                    ]}
-                    label="Select Rough name"
-                    light
-                    onChange={(select) =>
-                      setFieldValue("roughName", select.selectedItem)
-                    }
-                    titleText="Rough Name"
-                    type="default"
-                  />
-                  {touched.roughName && errors.roughName ? (
-                    <div className="error-message">{errors.roughName}</div>
-                  ) : null} */}
-                </div>
-                {/* <div className="bx--col-md-3"></div> */}
               </div>
               <div className="bx--row top-margin-model-input">
                 <div className="bx--col-md-3">
@@ -185,7 +152,7 @@ class CreateOfficePacket extends Component {
                     }
                     name="officecarat"
                     value={values.officecarat}
-                    id="office-packet-carat"
+                    id="return-office-packet-carat"
                     // invalid={false}
                     invalidText="Please fill"
                     labelText="Carat :"
@@ -208,7 +175,7 @@ class CreateOfficePacket extends Component {
                     }
                     name="piece"
                     value={values.piece}
-                    id="office-packet-piece"
+                    id="return-office-packet-piece"
                     placeholder="enter rate here"
                     // invalid={false}
                     invalidText="Please fill"
@@ -225,8 +192,7 @@ class CreateOfficePacket extends Component {
                   ) : null}
                 </div>
                 <p style={{ display: "grid" }}>
-                  Available Carat :{" "}
-                  <span style={{ color: "#DA1E28" }}>00.00</span>
+                  Wight lose : <span style={{ color: "#DA1E28" }}>00.00</span>
                 </p>
               </div>
               <div className="bx--row top-margin-model-input">
@@ -242,7 +208,7 @@ class CreateOfficePacket extends Component {
                     value={values.processName}
                     direction="top"
                     // itemToString={(item) => (item ? item.text : "")}
-                    id="process-name-office"
+                    id="return-process-name-office"
                     items={[
                       "Option 1",
                       "Option 2",
@@ -264,7 +230,7 @@ class CreateOfficePacket extends Component {
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
-                  {/* <DropDownSelection
+                  <DropDownSelection
                     className={
                       touched.assigneName && errors.assigneName
                         ? "error"
@@ -275,7 +241,7 @@ class CreateOfficePacket extends Component {
                     value={values.assigneName}
                     direction="top"
                     // itemToString={(item) => (item ? item.text : "")}
-                    id="employee-name-office"
+                    id="return-employee-name-office"
                     items={[
                       "Nmat1",
                       "Vinod2",
@@ -294,7 +260,7 @@ class CreateOfficePacket extends Component {
                   />
                   {touched.assigneName && errors.assigneName ? (
                     <div className="error-message">{errors.assigneName}</div>
-                  ) : null} */}
+                  ) : null}
                 </div>
               </div>
               <div className="bx--modal-footer modal-custome-footer">
@@ -323,4 +289,4 @@ class CreateOfficePacket extends Component {
   }
 }
 
-export default CreateOfficePacket;
+export default ReturnOfficePacket;
