@@ -4,6 +4,8 @@ import CreateOfficePacket from "./CreateOfficePacket";
 import Model from "../Common/Model";
 import ReturnOfficePacket from "./ReturnPacket";
 import ReturnOfficeRough from "./ReturnOfficeRough";
+import { RoughColumn } from "../Collumn/Rough";
+import { TableData } from "../Common/TableData";
 
 class OfficeIndex extends Component {
   constructor(props) {
@@ -51,6 +53,9 @@ class OfficeIndex extends Component {
         button="Create Packet"
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
+        rowData={TableData}
+        column={RoughColumn}
+        tabview={true}
       >
         <Model
           modalName="Office Packet Details"

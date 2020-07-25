@@ -162,6 +162,9 @@ const Sidebar = (props) => {
                           button={props.button}
                           onClick={props.onClick}
                           handelAddData={props.addButtonFunction}
+                          rowData={props.rowData}
+                          column={props.column}
+                          tabview={props.tabview}
                         />
                       )}
                       {props.children}

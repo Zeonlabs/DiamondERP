@@ -10,13 +10,13 @@ import TextField, {
 // import TabView from "../Common/Tabs";
 
 const validationSchema = Yup.object().shape({
-  packetId: Yup.string().required("*Packet Id is required"),
-  roughName: Yup.string().required("*Rough Name is required"),
-  officecarat: Yup.string().required("*carat is required"),
-  piece: Yup.string().required("*Piece is required"),
-  processName: Yup.string().required("*Process Name is required"),
-  assigneName: Yup.string().required("*Assign Name is required"),
-  createDate: Yup.string().required("*Date is required"),
+  officeReturnpacketId: Yup.string().required("*Packet Id is required"),
+  // roughName: Yup.string().required("*Rough Name is required"),
+  officeReturncarat: Yup.string().required("*carat is required"),
+  officeReturnpiece: Yup.string().required("*Piece is required"),
+  officeReturnprocessName: Yup.string().required("*Process Name is required"),
+  officeReturnassigneName: Yup.string().required("*Assign Name is required"),
+  officeReturnDate: Yup.string().required("*Date is required"),
 });
 class ReturnOfficePacket extends Component {
   constructor(props) {
@@ -41,13 +41,13 @@ class ReturnOfficePacket extends Component {
       <div style={{ marginBottom: "15%" }}>
         <Formik
           initialValues={{
-            packetId: "",
-            roughName: "",
-            officecarat: "",
-            piece: "",
-            processName: "",
-            assigneName: "",
-            createDate: "",
+            officeReturnpacketId: "",
+            // roughName: "",
+            officeReturncarat: "",
+            officeReturnpiece: "",
+            officeReturnprocessName: "",
+            officeReturnassigneName: "",
+            officeReturnDate: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -90,35 +90,38 @@ class ReturnOfficePacket extends Component {
                         (basicDate.getMonth() + 1) +
                         "/" +
                         basicDate.getFullYear();
-                      setFieldValue("createDate", formateDate);
+                      setFieldValue("officeReturnDate", formateDate);
                     }}
                     id="retutn-office-packet-create-date"
                     placeholder="dd/mm/yyyy"
                     labelText="Create packet Date"
                     className={
-                      touched.createDate && errors.createDate
+                      touched.officeReturnDate && errors.officeReturnDate
                         ? "error"
                         : "bx--col"
                     }
                     dateid="return-office-packet-id"
-                    name="createDate"
-                    value={values.createDate}
+                    name="officeReturnDate"
+                    value={values.officeReturnDate}
                     onBlur={handleBlur}
                   />
-                  {touched.createDate && errors.createDate ? (
-                    <div className="error-message">{errors.createDate}</div>
+                  {touched.officeReturnDate && errors.officeReturnDate ? (
+                    <div className="error-message">
+                      {errors.officeReturnDate}
+                    </div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
                   <DropDownSelection
                     className={
-                      touched.packetId && errors.packetId
+                      touched.officeReturnpacketId &&
+                      errors.officeReturnpacketId
                         ? "error"
                         : "bx--col dropdown-padding"
                     }
-                    name="packetId"
-                    selectedItem={values.packetId}
-                    value={values.packetId}
+                    name="officeReturnpacketId"
+                    selectedItem={values.officeReturnpacketId}
+                    value={values.officeReturnpacketId}
                     // itemToString={(item) => (item ? item.text : "")}
                     id="return-packet-id"
                     items={[
@@ -132,13 +135,16 @@ class ReturnOfficePacket extends Component {
                     label="Select Packet id"
                     light
                     onChange={(select) =>
-                      setFieldValue("packetId", select.selectedItem)
+                      setFieldValue("officeReturnpacketId", select.selectedItem)
                     }
                     titleText="Packet id"
                     type="default"
                   />
-                  {touched.packetId && errors.packetId ? (
-                    <div className="error-message">{errors.packetId}</div>
+                  {touched.officeReturnpacketId &&
+                  errors.officeReturnpacketId ? (
+                    <div className="error-message">
+                      {errors.officeReturnpacketId}
+                    </div>
                   ) : null}
                 </div>
               </div>
@@ -146,12 +152,12 @@ class ReturnOfficePacket extends Component {
                 <div className="bx--col-md-3">
                   <TextField
                     className={
-                      touched.officecarat && errors.officecarat
+                      touched.officeReturncarat && errors.officeReturncarat
                         ? "error"
                         : "bx--col"
                     }
-                    name="officecarat"
-                    value={values.officecarat}
+                    name="officeReturncarat"
+                    value={values.officeReturncarat}
                     id="return-office-packet-carat"
                     // invalid={false}
                     invalidText="Please fill"
@@ -164,22 +170,26 @@ class ReturnOfficePacket extends Component {
                     required
                     type="number"
                   />
-                  {touched.carat && errors.carat ? (
-                    <div className="error-message">{errors.carat}</div>
+                  {touched.officeReturncarat && errors.officeReturncarat ? (
+                    <div className="error-message">
+                      {errors.officeReturncarat}
+                    </div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
                   <TextField
                     className={
-                      touched.piece && errors.piece ? "error" : "bx--col"
+                      touched.officeReturnpiece && errors.officeReturnpiece
+                        ? "error"
+                        : "bx--col"
                     }
-                    name="piece"
-                    value={values.piece}
-                    id="return-office-packet-piece"
+                    name="officeReturnpiece"
+                    value={values.officeReturnpiece}
+                    id="return-office-packet-officeReturnpiece"
                     placeholder="enter rate here"
                     // invalid={false}
                     invalidText="Please fill"
-                    labelText="piece :"
+                    labelText="Piece :"
                     light={true}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -187,8 +197,10 @@ class ReturnOfficePacket extends Component {
                     required
                     type="number"
                   />
-                  {touched.piece && errors.piece ? (
-                    <div className="error-message">{errors.piece}</div>
+                  {touched.officeReturnpiece && errors.officeReturnpiece ? (
+                    <div className="error-message">
+                      {errors.officeReturnpiece}
+                    </div>
                   ) : null}
                 </div>
                 <p style={{ display: "grid" }}>
@@ -199,13 +211,14 @@ class ReturnOfficePacket extends Component {
                 <div className="bx--col-md-3">
                   <DropDownSelection
                     className={
-                      touched.processName && errors.processName
+                      touched.officeReturnprocessName &&
+                      errors.officeReturnprocessName
                         ? "error"
                         : "bx--col dropdown-padding"
                     }
-                    name="processName"
-                    selectedItem={values.processName}
-                    value={values.processName}
+                    name="officeReturnprocessName"
+                    selectedItem={values.officeReturnprocessName}
+                    value={values.officeReturnprocessName}
                     direction="top"
                     // itemToString={(item) => (item ? item.text : "")}
                     id="return-process-name-office"
@@ -220,25 +233,32 @@ class ReturnOfficePacket extends Component {
                     label="Select Process name"
                     light
                     onChange={(select) =>
-                      setFieldValue("processName", select.selectedItem)
+                      setFieldValue(
+                        "officeReturnprocessName",
+                        select.selectedItem
+                      )
                     }
                     titleText="Process Name"
                     type="default"
                   />
-                  {touched.processName && errors.processName ? (
-                    <div className="error-message">{errors.processName}</div>
+                  {touched.officeReturnprocessName &&
+                  errors.officeReturnprocessName ? (
+                    <div className="error-message">
+                      {errors.officeReturnprocessName}
+                    </div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
                   <DropDownSelection
                     className={
-                      touched.assigneName && errors.assigneName
+                      touched.officeReturnassigneName &&
+                      errors.officeReturnassigneName
                         ? "error"
                         : "bx--col dropdown-padding"
                     }
-                    name="assigneName"
-                    selectedItem={values.assigneName}
-                    value={values.assigneName}
+                    name="officeReturnassigneName"
+                    selectedItem={values.officeReturnassigneName}
+                    value={values.officeReturnassigneName}
                     direction="top"
                     // itemToString={(item) => (item ? item.text : "")}
                     id="return-employee-name-office"
@@ -253,13 +273,19 @@ class ReturnOfficePacket extends Component {
                     label="Select Assigne name"
                     light
                     onChange={(select) =>
-                      setFieldValue("assigneName", select.selectedItem)
+                      setFieldValue(
+                        "officeReturnassigneName",
+                        select.selectedItem
+                      )
                     }
                     titleText="Assigne Name"
                     type="default"
                   />
-                  {touched.assigneName && errors.assigneName ? (
-                    <div className="error-message">{errors.assigneName}</div>
+                  {touched.officeReturnassigneName &&
+                  errors.officeReturnassigneName ? (
+                    <div className="error-message">
+                      {errors.officeReturnassigneName}
+                    </div>
                   ) : null}
                 </div>
               </div>

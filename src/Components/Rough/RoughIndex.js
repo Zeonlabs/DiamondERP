@@ -4,6 +4,8 @@ import Model from "../Common/Model";
 import AddRoughModal from "./AddRoughModal";
 import AssignRough from "./AssignRough";
 import RoughSorting from "./RoughSorting";
+import { RoughColumn } from "../Collumn/Rough";
+import { TableData } from "../Common/TableData";
 
 class RoughIndex extends Component {
   constructor(props) {
@@ -57,6 +59,8 @@ class RoughIndex extends Component {
         button="Add Rough"
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
+        rowData={TableData}
+        column={RoughColumn}
       >
         {/* {console.log("log in render")} */}
         {/* <h1>Hello Fuck</h1> */}

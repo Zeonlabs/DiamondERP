@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import Sidebar from "../Common/Sidebar";
 import Model from "../Common/Model";
-import CreatePacket from "./CreatePacket";
+import CreatePacket from "./CreateSubPacket";
+import CreateSubPacket from "./CreateSubPacket";
+import ReturnSubPacket from "./ReturnPacket";
+import AssignSubPacket from "./AssignFactoryPacket";
+import { TableData } from "../Common/TableData";
+import { RoughColumn } from "../Collumn/Rough";
 
 class FactoryIndex extends Component {
   constructor(props) {
@@ -27,9 +32,26 @@ class FactoryIndex extends Component {
 
   render() {
     const tabArray = [
-      { id: "1", lebal: "Add Rough", tabContent: <CreatePacket /> },
-      { id: "2", lebal: "Sorting Rough", tabContent: <CreatePacket /> },
-      { id: "3", lebal: "Assign Rough", tabContent: <CreatePacket /> },
+      {
+        id: "1",
+        lebal: "Create sub Packet",
+        tabContent: <CreateSubPacket close={this.closeModal} />,
+      },
+      {
+        id: "2",
+        lebal: "Assign Packet",
+        tabContent: <AssignSubPacket close={this.closeModal} />,
+      },
+      {
+        id: "3",
+        lebal: "Return sub Packet",
+        tabContent: <ReturnSubPacket close={this.closeModal} />,
+      },
+      // {
+      //   id: "3",
+      //   lebal: "Return Rough",
+      //   tabContent: <ReturnOfficeRough close={this.closeModal} />,
+      // },
     ];
     return (
       <Sidebar
@@ -37,8 +59,12 @@ class FactoryIndex extends Component {
         button="Create Packet"
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
+        rowData={TableData}
+        column={RoughColumn}
+        tabview={true}
       >
         <Model
+          modalName="Factory Packet Details"
           open={this.state.model}
           close={this.closeModal}
           tabContent={tabArray}

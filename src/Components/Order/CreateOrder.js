@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form } from "carbon-components-react";
+import { Form, ContentSwitcher, Switch } from "carbon-components-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import TextField, {
@@ -12,13 +12,16 @@ import TextField, {
 const validationSchema = Yup.object().shape({
   // officeIssueassigneName: Yup.string().required("*Assign Id is required"),
   // roughName: Yup.string().required("*Rough Name is required"),
-  officeIssuecarat: Yup.string().required("*carat is required"),
-  officeIssuepiece: Yup.string().required("*Piece is required"),
-  officeIssueprocessName: Yup.string().required("*Process Name is required"),
-  officeIssueassigneName: Yup.string().required("*Assign Name is required"),
-  officePaketcreateDate: Yup.string().required("*Date is required"),
+  orderBuyerName: Yup.string().required("*Buyer name is required"),
+  ordereDalalaName: Yup.string().required("*Dalal name is required"),
+  orderCarat: Yup.string().required("*Carat is required"),
+  orderAmount: Yup.string().required("*Amount is required"),
+  orderSellingDate: Yup.string().required("*Selling Date is required"),
+  orderPaymentDays: Yup.string().required("*Payment days is required"),
+  orderAmountPayed: Yup.string().required("*Payed Amount is required"),
+  orderCreateDate: Yup.string().required("*Date is required"),
 });
-class CreateOfficePacket extends Component {
+class CreateOrder extends Component {
   constructor(props) {
     super(props);
 
@@ -41,13 +44,14 @@ class CreateOfficePacket extends Component {
       <div style={{ marginBottom: "15%" }}>
         <Formik
           initialValues={{
-            officeIssueassigneName: "",
-            // roughName: "",
-            officeIssuecarat: "",
-            officeIssuepiece: "",
-            officeIssueprocessName: "",
-            // officeIssueassigneName: "",
-            officePaketcreateDate: "",
+            orderBuyerName: "",
+            ordereDalalaName: "",
+            orderCarat: "",
+            orderAmount: "",
+            orderSellingDate: "",
+            orderPaymentDays: "",
+            orderAmountPayed: "",
+            orderCreateDate: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -74,9 +78,16 @@ class CreateOfficePacket extends Component {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <h5 className="h5-form-label">
+              {/* <h5 className="h5-form-label">
                 Packet Id : <span style={{ color: "#0F61FD" }}>#PID001</span>
-              </h5>
+              </h5> */}
+              <div className="h5-form-label">
+                <ContentSwitcher onChange={console.log}>
+                  <Switch name={"rough"} text="Rough Order" />
+                  <Switch name={"sorting"} text="Sorting Selling" />
+                  <Switch name={"polish"} text="Polish Selling" />
+                </ContentSwitcher>
+              </div>
               <div className="bx--row">
                 <div className="bx--col-md-3">
                   <DateSelection
@@ -90,42 +101,106 @@ class CreateOfficePacket extends Component {
                         (basicDate.getMonth() + 1) +
                         "/" +
                         basicDate.getFullYear();
-                      setFieldValue("officePaketcreateDate", formateDate);
+                      setFieldValue("orderCreateDate", formateDate);
                     }}
-                    id="office-packet-create-date"
+                    id="order-create-date"
                     placeholder="dd/mm/yyyy"
-                    labelText="Create packet Date"
+                    labelText="Order Date"
                     className={
-                      touched.officePaketcreateDate &&
-                      errors.officePaketcreateDate
+                      touched.orderCreateDate && errors.orderCreateDate
                         ? "error"
                         : "bx--col"
                     }
-                    dateid="office-packet-id"
-                    name="officePaketcreateDate"
-                    value={values.officePaketcreateDate}
+                    dateid="order-packet-id"
+                    name="orderCreateDate"
+                    value={values.orderCreateDate}
                     onBlur={handleBlur}
                   />
-                  {touched.officePaketcreateDate &&
-                  errors.officePaketcreateDate ? (
+                  {touched.orderCreateDate && errors.orderCreateDate ? (
                     <div className="error-message">
-                      {errors.officePaketcreateDate}
+                      {errors.orderCreateDate}
                     </div>
+                  ) : null}
+                </div>
+                <div className="bx--col-md-3">
+                  <DateSelection
+                    dateFormat="d/m/Y"
+                    datePickerType="single"
+                    onChange={(date) => {
+                      const basicDate = new Date(date);
+                      const formateDate =
+                        basicDate.getDate() +
+                        "/" +
+                        (basicDate.getMonth() + 1) +
+                        "/" +
+                        basicDate.getFullYear();
+                      setFieldValue("orderSellingDate", formateDate);
+                    }}
+                    id="order-part-create-date"
+                    placeholder="dd/mm/yyyy"
+                    labelText="Billing Date"
+                    className={
+                      touched.orderSellingDate && errors.orderSellingDate
+                        ? "error"
+                        : "bx--col"
+                    }
+                    dateid="order-part-packet-id"
+                    name="orderSellingDate"
+                    value={values.orderSellingDate}
+                    onBlur={handleBlur}
+                  />
+                  {touched.orderSellingDate && errors.orderSellingDate ? (
+                    <div className="error-message">
+                      {errors.orderSellingDate}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+              <div className="bx--row top-margin-model-input">
+                <div className="bx--col-md-3">
+                  <DropDownSelection
+                    className={
+                      touched.orderBuyerName && errors.orderBuyerName
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="orderBuyerName"
+                    selectedItem={values.orderBuyerName}
+                    value={values.orderBuyerName}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="order-buyer-name"
+                    items={[
+                      "Option 1",
+                      "Option 2",
+                      "Option 3",
+                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
+                      "Option 5",
+                      "Option 6",
+                    ]}
+                    label="Buyer Name"
+                    light
+                    onChange={(select) =>
+                      setFieldValue("orderBuyerName", select.selectedItem)
+                    }
+                    titleText="Buyer Name"
+                    type="default"
+                  />
+                  {touched.orderBuyerName && errors.orderBuyerName ? (
+                    <div className="error-message">{errors.orderBuyerName}</div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
                   <DropDownSelection
                     className={
-                      touched.officeIssueassigneName &&
-                      errors.officeIssueassigneName
+                      touched.ordereDalalaName && errors.ordereDalalaName
                         ? "error"
                         : "bx--col dropdown-padding"
                     }
-                    name="officeIssueassigneName"
-                    selectedItem={values.officeIssueassigneName}
-                    value={values.officeIssueassigneName}
+                    name="ordereDalalaName"
+                    selectedItem={values.ordereDalalaName}
+                    value={values.ordereDalalaName}
                     // itemToString={(item) => (item ? item.text : "")}
-                    id="rough-assignee-id"
+                    id="order-dalal-name"
                     items={[
                       "Option 1",
                       "Option 2",
@@ -134,55 +209,19 @@ class CreateOfficePacket extends Component {
                       "Option 5",
                       "Option 6",
                     ]}
-                    label="Select Assign id"
+                    label="Dalal Name"
                     light
                     onChange={(select) =>
-                      setFieldValue(
-                        "officeIssueassigneName",
-                        select.selectedItem
-                      )
+                      setFieldValue("ordereDalalaName", select.selectedItem)
                     }
-                    titleText="Assign id"
+                    titleText="Dalal Name"
                     type="default"
                   />
-                  {touched.officeIssueassigneName &&
-                  errors.officeIssueassigneName ? (
+                  {touched.ordereDalalaName && errors.ordereDalalaName ? (
                     <div className="error-message">
-                      {errors.officeIssueassigneName}
+                      {errors.ordereDalalaName}
                     </div>
                   ) : null}
-                </div>
-                <div className="bx--col-md-3">
-                  {/* <DropDownSelection
-                    className={
-                      touched.roughName && errors.roughName
-                        ? "error"
-                        : "bx--col dropdown-padding"
-                    }
-                    name="roughName"
-                    selectedItem={values.roughName}
-                    value={values.roughName}
-                    // itemToString={(item) => (item ? item.text : "")}
-                    id="rough-name-office"
-                    items={[
-                      "Option 1",
-                      "Option 2",
-                      "Option 3",
-                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
-                      "Option 5",
-                      "Option 6",
-                    ]}
-                    label="Select Rough name"
-                    light
-                    onChange={(select) =>
-                      setFieldValue("roughName", select.selectedItem)
-                    }
-                    titleText="Rough Name"
-                    type="default"
-                  />
-                  {touched.roughName && errors.roughName ? (
-                    <div className="error-message">{errors.roughName}</div>
-                  ) : null} */}
                 </div>
                 {/* <div className="bx--col-md-3"></div> */}
               </div>
@@ -190,13 +229,13 @@ class CreateOfficePacket extends Component {
                 <div className="bx--col-md-3">
                   <TextField
                     className={
-                      touched.officeIssuecarat && errors.officeIssuecarat
+                      touched.orderCarat && errors.orderCarat
                         ? "error"
                         : "bx--col"
                     }
-                    name="officeIssuecarat"
-                    value={values.officeIssuecarat}
-                    id="office-packet-carat"
+                    name="orderCarat"
+                    value={values.orderCarat}
+                    id="order-packet-carat"
                     // invalid={false}
                     invalidText="Please fill"
                     labelText="Carat :"
@@ -208,26 +247,24 @@ class CreateOfficePacket extends Component {
                     required
                     type="number"
                   />
-                  {touched.officeIssuecarat && errors.officeIssuecarat ? (
-                    <div className="error-message">
-                      {errors.officeIssuecarat}
-                    </div>
+                  {touched.orderCarat && errors.orderCarat ? (
+                    <div className="error-message">{errors.orderCarat}</div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
                   <TextField
                     className={
-                      touched.officeIssuepiece && errors.officeIssuepiece
+                      touched.orderAmount && errors.orderAmount
                         ? "error"
                         : "bx--col"
                     }
-                    name="officeIssuepiece"
-                    value={values.officeIssuepiece}
-                    id="office-packet-officeIssuepiece"
-                    placeholder="enter Piece here"
+                    name="orderAmount"
+                    value={values.orderAmount}
+                    id="orderAmount"
+                    placeholder="enter rate here"
                     // invalid={false}
                     invalidText="Please fill"
-                    labelText="Piece :"
+                    labelText="Rate :"
                     light={true}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -235,91 +272,73 @@ class CreateOfficePacket extends Component {
                     required
                     type="number"
                   />
-                  {touched.officeIssuepiece && errors.officeIssuepiece ? (
-                    <div className="error-message">
-                      {errors.officeIssuepiece}
-                    </div>
+                  {touched.orderAmount && errors.orderAmount ? (
+                    <div className="error-message">{errors.orderAmount}</div>
                   ) : null}
                 </div>
                 <p style={{ display: "grid" }}>
-                  Available Carat :{" "}
-                  <span style={{ color: "#DA1E28" }}>00.00</span>
+                  Total Amount : <span style={{ color: "#DA1E28" }}>00.00</span>
                 </p>
               </div>
               <div className="bx--row top-margin-model-input">
                 <div className="bx--col-md-3">
-                  <DropDownSelection
+                  <TextField
                     className={
-                      touched.officeIssueprocessName &&
-                      errors.officeIssueprocessName
+                      touched.orderPaymentDays && errors.orderPaymentDays
                         ? "error"
-                        : "bx--col dropdown-padding"
+                        : "bx--col"
                     }
-                    name="officeIssueprocessName"
-                    selectedItem={values.officeIssueprocessName}
-                    value={values.officeIssueprocessName}
-                    direction="top"
-                    // itemToString={(item) => (item ? item.text : "")}
-                    id="process-name-office"
-                    items={[
-                      "Option 1",
-                      "Option 2",
-                      "Option 3",
-                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
-                      "Option 5",
-                      "Option 6",
-                    ]}
-                    label="Select Process name"
-                    light
-                    onChange={(select) =>
-                      setFieldValue(
-                        "officeIssueprocessName",
-                        select.selectedItem
-                      )
-                    }
-                    titleText="Process Name"
-                    type="default"
+                    name="orderPaymentDays"
+                    value={values.orderPaymentDays}
+                    id="orderPaymentDays"
+                    placeholder="enter payment Days here"
+                    // invalid={false}
+                    invalidText="Please fill"
+                    labelText="payment Days :"
+                    light={true}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    // onClick={function noRefCheck() {}}
+                    required
+                    type="number"
                   />
-                  {touched.officeIssueprocessName &&
-                  errors.officeIssueprocessName ? (
+                  {touched.orderPaymentDays && errors.orderPaymentDays ? (
                     <div className="error-message">
-                      {errors.officeIssueprocessName}
+                      {errors.orderPaymentDays}
                     </div>
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
-                  {/* <DropDownSelection
+                  <TextField
                     className={
-                      touched.officeIssueassigneName && errors.officeIssueassigneName
+                      touched.orderAmountPayed && errors.orderAmountPayed
                         ? "error"
-                        : "bx--col dropdown-padding"
+                        : "bx--col"
                     }
-                    name="officeIssueassigneName"
-                    selectedItem={values.officeIssueassigneName}
-                    value={values.officeIssueassigneName}
-                    direction="top"
-                    // itemToString={(item) => (item ? item.text : "")}
-                    id="employee-name-office"
-                    items={[
-                      "Nmat1",
-                      "Vinod2",
-                      "Yash3",
-                      "Loremipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
-                      "Pachi5",
-                      "bhuro6",
-                    ]}
-                    label="Select Assigne name"
-                    light
-                    onChange={(select) =>
-                      setFieldValue("officeIssueassigneName", select.selectedItem)
-                    }
-                    titleText="Assigne Name"
-                    type="default"
+                    name="orderAmountPayed"
+                    value={values.orderAmountPayed}
+                    id="orderAmountPayed"
+                    placeholder="enter payed amount here"
+                    // invalid={false}
+                    invalidText="Please fill"
+                    labelText="Payed Amount:"
+                    light={true}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    // onClick={function noRefCheck() {}}
+                    required
+                    type="number"
                   />
-                  {touched.officeIssueassigneName && errors.officeIssueassigneName ? (
-                    <div className="error-message">{errors.officeIssueassigneName}</div>
-                  ) : null} */}
+                  {touched.orderAmountPayed && errors.orderAmountPayed ? (
+                    <div className="error-message">
+                      {errors.orderAmountPayed}
+                    </div>
+                  ) : null}
                 </div>
+                <p style={{ display: "grid" }}>
+                  Remaining Amount :{" "}
+                  <span style={{ color: "#DA1E28" }}>00.00</span>
+                </p>
               </div>
               <div className="bx--modal-footer modal-custome-footer">
                 <button
@@ -347,4 +366,4 @@ class CreateOfficePacket extends Component {
   }
 }
 
-export default CreateOfficePacket;
+export default CreateOrder;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "../Common/Sidebar";
+import SellerDetailsPage from "../Common/SellerDetailsPage";
 
 class SellingIndex extends Component {
   constructor(props) {
@@ -10,8 +11,8 @@ class SellingIndex extends Component {
 
   render() {
     return (
-      <Sidebar>
-        <div>Sellings</div>
+      <Sidebar table="no">
+        <SellerDetailsPage />
       </Sidebar>
     );
   }

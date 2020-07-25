@@ -19,6 +19,8 @@ import {
   // TableSelectRow,
   TableCell,
   Pagination,
+  Tabs,
+  Tab,
   // OverflowMenu,
   // OverflowMenuItem,
 } from "carbon-components-react";
@@ -32,277 +34,13 @@ import { Add24, Edit20, Delete20, View20 } from "@carbon/icons-react";
 class PageTopSection extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      rowData: [
-        {
-          attached_groups: "Kevins VM Groups",
-          id: "1",
-          key: 1,
-          name: "Load Balancer 3",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 1,
-          isEditable: true,
-        },
-        {
-          attached_groups: "Maureens VM Groups",
-          id: "2",
-          key: 2,
-          name: "Load Balancer 1",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 2,
-        },
-        {
-          attached_groups: "Andrews VM Groups",
-          id: "3",
-          key: 3,
-          name: "Load Balancer 2",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 3,
-        },
-        {
-          attached_groups: "Marcs VM Groups",
-          id: "4",
-          key: 4,
-          name: "Load Balancer 6",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 4,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: "5",
-          key: 5,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: "6",
-          key: 6,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-        {
-          attached_groups: "Andrews VM Groups",
-          id: "7",
-          key: 7,
-          name: "Load Balancer 2",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 3,
-        },
-        {
-          attached_groups: "Marcs VM Groups",
-          id: "8",
-          key: 8,
-          name: "Load Balancer 6",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 4,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: "9",
-          key: 9,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: "10",
-          key: 10,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: "11",
-          key: 11,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: "12",
-          key: 12,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-        {
-          attached_groups: "Andrews VM Groups",
-          id: "13",
-          key: 13,
-          name: "Load Balancer 2",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 3,
-        },
-        {
-          attached_groups: "Marcs VM Groups",
-          id: "14",
-          key: 14,
-          name: "Load Balancer 6",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 4,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: "15",
-          key: 15,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: "16",
-          key: 16,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-        {
-          attached_groups: "Andrews VM Groups",
-          id: "17",
-          key: 17,
-          name: "Load Balancer 2",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 3,
-        },
-        {
-          attached_groups: "Marcs VM Groups",
-          id: "18",
-          key: 18,
-          name: "Load Balancer 6",
-          port: 3000,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Disabled",
-          btn: 4,
-        },
-        {
-          attached_groups: "Mels VM Groups",
-          id: "19",
-          key: 19,
-          name: "Load Balancer 4",
-          port: 443,
-          protocol: "HTTP",
-          rule: "Round robin",
-          status: "Starting",
-          btn: 5,
-        },
-        {
-          attached_groups: "Ronjas VM Groups",
-          id: "20",
-          key: 20,
-          name: "Load Balancer 5",
-          port: 80,
-          protocol: "HTTP",
-          rule: "DNS delegation",
-          status: "Active",
-          btn: 6,
-        },
-      ],
-      headerData: [
-        {
-          header: "View",
-          key: "id",
-          size: "20px",
-        },
-        {
-          header: "Name",
-          key: "name",
-          size: "200px",
-        },
-        {
-          header: "Protocol",
-          key: "protocol",
-          size: "50px",
-        },
-        {
-          header: "Port",
-          key: "port",
-          size: "50px",
-        },
-        {
-          header: "Rule",
-          key: "rule",
-          size: "155px",
-        },
-        {
-          header: "Attached Groups",
-          key: "attached_groups",
-          size: "300px",
-        },
-        {
-          header: "Status",
-          key: "status",
-          size: "100px",
-        },
-
-        {
-          header: "Action",
-          key: "btn",
-          size: "100px",
-        },
-      ],
+      rowData: this.props.rowData,
+      headerData: this.props.column,
       currentPage: 0,
       dataPerPage: 10,
       currentPageData: [],
+      cureentTab: 0,
     };
   }
 
@@ -328,6 +66,13 @@ class PageTopSection extends Component {
       });
       console.log("this ia a s array data", currentPageData);
     }
+  };
+
+  handelTab = (e) => {
+    console.log("this is a log to check the tab on Change -> ", e);
+    this.setState({
+      cureentTab: e,
+    });
   };
 
   handelOnEditClick = (id) => {
@@ -426,6 +171,15 @@ class PageTopSection extends Component {
               Download
             </TableBatchAction>
           </TableBatchAction> */}
+                {this.props.tabview ? (
+                  <Tabs onSelectionChange={this.handelTab}>
+                    <Tab id="1" label="Rough"></Tab>
+                    <Tab id="2" label="Sub Packets"></Tab>
+                    <Tab id="3" label="Return Packets"></Tab>
+                  </Tabs>
+                ) : (
+                  ""
+                )}
                 <TableToolbarContent className="tollbar-content">
                   <TableToolbarSearch
                     tabIndex={
@@ -462,7 +216,9 @@ class PageTopSection extends Component {
                     kind="primary"
                     className="add-data-button"
                   >
-                    {this.props.button}
+                    {this.state.cureentTab === 2
+                      ? "Return Packet"
+                      : this.props.button}
                     <Add24 />
                   </Button>
                 </TableToolbarContent>
