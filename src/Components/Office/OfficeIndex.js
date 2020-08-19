@@ -4,8 +4,8 @@ import CreateOfficePacket from "./CreateOfficePacket";
 import Model from "../Common/Model";
 import ReturnOfficePacket from "./ReturnPacket";
 import ReturnOfficeRough from "./ReturnOfficeRough";
-import { RoughColumn } from "../Collumn/Rough";
 import { TableData } from "../Common/TableData";
+import { OfficeRough } from "../Collumn/Office/OfficeRough";
 
 class OfficeIndex extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ class OfficeIndex extends Component {
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
         rowData={TableData}
-        column={RoughColumn}
+        column={OfficeRough}
         tabview={true}
       >
         <Model

@@ -33,6 +33,8 @@ import {
   Product32,
   Settings32,
   ChevronDown32,
+  UserProfile32,
+  Money32,
 } from "@carbon/icons-react";
 import { withRouter } from "react-router";
 import routes from "../../js/Routes";
@@ -91,13 +93,8 @@ const Sidebar = (props) => {
       name: "Employees",
       collaps: employeeCollaps,
       innerNevigation: [
-        { iconName: <FlaggingTaxi32 />, name: "Seller", url: routes.seller },
-        {
-          iconName: <WatsonHealthCrossReference32 />,
-          name: "Buyer",
-          url: routes.buyer,
-        },
-        { iconName: <UserProfileAlt32 />, name: "Broker", url: routes.broker },
+        { iconName: <UserProfile32 />, name: "Employee", url: routes.employee },
+        { iconName: <Money32 />, name: "Salary", url: routes.sallary },
       ],
     },
     { iconName: <Product32 />, name: "Cost Master", url: routes.costMaster },

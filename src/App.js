@@ -15,6 +15,8 @@ import BuyerIndex from "./Components/Selling/Buyer/BuyerIndex";
 import BrokerIndex from "./Components/Selling/Broker/BrokerIndex";
 import CostModelIndex from "./Components/CostModel/CostModelIndex";
 import SettingIndex from "./Components/Setting/SettingIndex";
+import EmployeeIndex from "./Components/Employee/Employee/EmployeeIndex";
+import SallaryModuleIndex from "./Components/Employee/Sallary/SalaryModule";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path={routes.seller} component={SellerIndex} />
         <Route path={routes.buyer} component={BuyerIndex} />
         <Route path={routes.broker} component={BrokerIndex} />
+        <Route path={routes.employee} component={EmployeeIndex} />
+        <Route path={routes.sallary} component={SallaryModuleIndex} />
         <Route path={routes.costMaster} component={CostModelIndex} />
         <Route path={routes.settingpage} component={SettingIndex} />
 

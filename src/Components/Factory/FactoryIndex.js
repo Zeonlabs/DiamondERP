@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Sidebar from "../Common/Sidebar";
 import Model from "../Common/Model";
-import CreatePacket from "./CreateSubPacket";
 import CreateSubPacket from "./CreateSubPacket";
 import ReturnSubPacket from "./ReturnPacket";
 import AssignSubPacket from "./AssignFactoryPacket";
 import { TableData } from "../Common/TableData";
-import { RoughColumn } from "../Collumn/Rough";
+import { Factoryrough } from "../Collumn/Factory/FactoryRough";
 
 class FactoryIndex extends Component {
   constructor(props) {
@@ -60,7 +59,7 @@ class FactoryIndex extends Component {
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
         rowData={TableData}
-        column={RoughColumn}
+        column={Factoryrough}
         tabview={true}
       >
         <Model

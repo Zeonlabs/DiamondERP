@@ -13,6 +13,8 @@ const routes = {
   seller: "/seller",
   broker: "/broker",
   buyer: "/buyer",
+  employee: "/employee",
+  sallary: "/sallary",
   costMaster: "/cost-master",
   settingpage: "/SettingPage",
 };

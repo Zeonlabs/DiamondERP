@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import Sidebar from "../Common/Sidebar";
-// import CreateOfficePacket from "./CreateOfficePacket";
-import Model from "../Common/Model";
-// import ReturnOfficePacket from "./ReturnPacket";
-// import ReturnOfficeRough from "./ReturnOfficeRough";
-import CreateOrder from "./CreateOrder";
-import { TableData } from "../Common/TableData";
-import { OrderSummary } from "../Collumn/OrderSummary";
+import Sidebar from "../../Common/Sidebar";
+import Model from "../../Common/Model";
+import { TableData } from "../../Common/TableData";
+import FasctoryEmployee from "./FasctoryEmployee";
+import { Employee } from "../../Collumn/Employee";
 
-class OrderIndex extends Component {
+class EmployeeIndex extends Component {
   constructor(props) {
     super(props);
 
@@ -34,21 +31,22 @@ class OrderIndex extends Component {
     const tabArray = [
       {
         id: "1",
-        lebal: "Add Order",
-        tabContent: <CreateOrder close={this.closeModal} />,
+        lebal: "Add Employee details",
+        tabContent: <FasctoryEmployee close={this.closeModal} />,
       },
     ];
     return (
       <Sidebar
-        title="Order Summary"
-        button="Add Order"
+        title="Employee"
+        button="Add Employee"
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
         rowData={TableData}
-        column={OrderSummary}
+        column={Employee}
+        // tabview={true}
       >
         <Model
-          modalName="Order Details"
+          modalName="Add Employee Data"
           open={this.state.model}
           close={this.closeModal}
           tabContent={tabArray}
@@ -58,4 +56,4 @@ class OrderIndex extends Component {
   }
 }
 
-export default OrderIndex;
+export default EmployeeIndex;
