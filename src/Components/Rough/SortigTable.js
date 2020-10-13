@@ -9,7 +9,7 @@ class SortigTable extends Component {
   }
 
   render() {
-    console.log("SortigTable -> constructor -> props", this.props);
+    // console.log("SortigTable -> constructor -> props", this.props);
     return (
       <div className="sorting-table-wrapper">
         <table>
@@ -43,7 +43,9 @@ class SortigTable extends Component {
             </td>
             <td>
               <p className="sorting-table-input">
-                {this.props.value.chockiCarat * this.props.value.chockiPrice}
+                {(
+                  this.props.value.chockiCarat * this.props.value.chockiPrice
+                ).toFixed(2)}
               </p>
             </td>
           </tr>
@@ -71,7 +73,9 @@ class SortigTable extends Component {
             </td>
             <td>
               <p className="sorting-table-input">
-                {this.props.value.markisCarat * this.props.value.markisPrice}
+                {(
+                  this.props.value.markisCarat * this.props.value.markisPrice
+                ).toFixed(2)}
               </p>
             </td>
           </tr>
@@ -99,7 +103,9 @@ class SortigTable extends Component {
             </td>
             <td>
               <p className="sorting-table-input">
-                {this.props.value.golCarat * this.props.value.golPrice}
+                {(
+                  this.props.value.golCarat * this.props.value.golPrice
+                ).toFixed(2)}
               </p>
             </td>
           </tr>
@@ -127,7 +133,9 @@ class SortigTable extends Component {
             </td>
             <td>
               <p className="sorting-table-input">
-                {this.props.value.crystalCarat * this.props.value.crystalPrice}
+                {(
+                  this.props.value.crystalCarat * this.props.value.crystalPrice
+                ).toFixed(2)}
               </p>
             </td>
           </tr>
@@ -155,7 +163,9 @@ class SortigTable extends Component {
             </td>
             <td>
               <p className="sorting-table-input">
-                {this.props.value.outCarat * this.props.value.outPrice}
+                {(
+                  this.props.value.outCarat * this.props.value.outPrice
+                ).toFixed(2)}
               </p>
             </td>
           </tr>

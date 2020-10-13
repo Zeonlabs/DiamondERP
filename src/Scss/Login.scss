@@ -13,6 +13,11 @@
   // opacity: 1;
 }
 
+.bx--side-nav__items {
+  a {
+    color: transparent !important;
+  }
+}
 @keyframes cssAnimation {
   to {
     opacity: 0;

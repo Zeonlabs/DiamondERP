@@ -6,58 +6,53 @@ export const RoughColumn = [
   },
   {
     header: "Saller Name",
-    key: "name",
+    key: "sellername",
     // size: "200px",
   },
   {
     header: "Broker Name",
-    key: "protocol",
+    key: "brokername",
     // size: "50px",
   },
   {
     header: "Carat",
-    key: "port",
+    key: "carat",
     // size: "50px",
   },
   {
     header: "Rate",
-    key: "rule",
+    key: "rate",
     // size: "155px",
   },
   {
     header: "Total Amount",
-    key: "attached_groups",
+    key: "rough_total",
     // size: "300px",
   },
   {
     header: "Purchase Date",
-    key: "status",
+    key: "date",
     // size: "100px",
   },
   {
     header: "days",
-    key: "name",
+    key: "days",
     // size: "200px",
   },
   {
     header: "Last Date",
-    key: "protocol",
+    key: "lastdate",
     // size: "50px",
   },
   {
     header: "Office",
-    key: "port",
+    key: "officecarat",
     // size: "50px",
   },
   {
     header: "Factory",
-    key: "rule",
+    key: "factorycarat",
     // size: "155px",
-  },
-  {
-    header: "Remain",
-    key: "attached_groups",
-    // size: "300px",
   },
 
   {

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "../../Common/Sidebar";
 import Model from "../../Common/Model";
-// import CreateSubPacket from "./CreateSubPacket";
-// import ReturnSubPacket from "./ReturnPacket";
-// import AssignSubPacket from "./AssignFactoryPacket";
 import { TableData } from "../../Common/TableData";
 import { SalaryModule } from "../../Collumn/SalaryModule";
 import AddSallary from "./AddSallary";

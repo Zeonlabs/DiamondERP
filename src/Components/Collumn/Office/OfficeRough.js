@@ -5,45 +5,41 @@ export const OfficeRough = [
     // size: "20px",
   },
   {
-    header: "Assignee Name",
-    key: "name",
+    header: "Carat",
+    key: "carat",
     // size: "200px",
   },
   {
-    header: "Total Carat",
-    key: "protocol",
-    // size: "50px",
-  },
-  {
-    header: "Piece",
-    key: "port",
+    header: "Office Carat",
+    key: "office_total_carat",
     // size: "50px",
   },
   {
     header: "Remaining Carat",
-    key: "rule",
+    key: "copyCarat",
+    // size: "50px",
+  },
+  {
+    header: "Assign Name",
+    key: "office_assigne_name",
     // size: "155px",
   },
   {
-    header: "Issue Date",
-    key: "attached_groups",
-    // size: "300px",
+    header: "Total Packet",
+    key: "packetNo",
+    // size: "155px",
   },
   {
-    header: "Return Date",
-    key: "status",
+    header: "Assign Date",
+    key: "assign_date",
     // size: "100px",
   },
   {
-    header: "Packet",
-    key: "name",
+    header: "Return Date",
+    key: "return_date",
     // size: "200px",
   },
-  {
-    header: "Weight Lose",
-    key: "protocol",
-    // size: "50px",
-  },
+
   {
     header: "Action",
     key: "btn",

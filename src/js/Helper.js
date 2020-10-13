@@ -130,4 +130,4 @@ export const convertTypeToNumber = (id, type) => {
   }
 };
 
-export const baseUrl = "http://localhost:8081";
+export const baseUrl = "http://localhost:3002/api";

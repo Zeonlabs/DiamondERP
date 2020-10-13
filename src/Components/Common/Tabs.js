@@ -11,7 +11,12 @@ class TabView extends Component {
   render() {
     return (
       <div>
-        <Tabs role="navigation" selected={0} selectionMode="automatic">
+        <Tabs
+          role="navigation"
+          className="tab-wrapper"
+          selected={0}
+          selectionMode="automatic"
+        >
           {this.props.tabContent.map((value) => (
             <Tab
               // href="#"

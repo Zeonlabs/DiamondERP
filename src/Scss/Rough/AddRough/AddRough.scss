@@ -10,3 +10,14 @@
 .top-margin-model-input {
   margin-top: 3%;
 }
+
+.assign-rough-date-wrapper {
+  .bx--date-picker-container {
+    flex-direction: row;
+    align-items: baseline;
+  }
+  label {
+    margin: 0 4% 0px 0;
+    font-size: 14px;
+  }
+}

@@ -3,6 +3,10 @@ import { Form } from "carbon-components-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import TextField, { DateSelection } from "../Common/CommonComponents";
+// import { connect } from "react-redux";
+// import { addRough } from "../../Actions/Rough";
+import moment from "moment";
+// import { dateConversion } from "../Common/Helper";
 // import { Tab } from "carbon-components-react";
 // import TabView from "../Common/Tabs";
 
@@ -22,11 +26,29 @@ class AddRoughModal extends Component {
   }
 
   handelSubmit = (e) => {
-    console.log(e);
+    console.log("AddRoughModal -> render -> values", e.purchaseDate);
+    const data = {
+      carat: e.carat,
+      days: e.paymentDays,
+      date: moment(e.purchaseDate, "DD-MM-YYYY").format("YYYY-MM-DD"),
+      sellername: e.sallerName,
+      brokername: e.brokerName,
+      rate: e.rate,
+      lastdate: moment(e.purchaseDate, "DD-MM-YYYY")
+        .add(e.paymentDays, "days")
+        .format("YYYY-MM-DD"),
+      officecarat: 0,
+      factorycarat: 0,
+    };
+    console.log(
+      "AddRoughModal -> handelSubmit -> data",
+      moment(e.purchaseDate, "DD-MM-YYYY").format("YYYY-MM-DD")
+    );
+    this.props.handelAddRough(data);
   };
 
   handelOnChange = (e) => {
-    console.log("AddRoughModal -> handelOnChange -> e", e.target);
+    // console.log("AddRoughModal -> handelOnChange -> e", e.target);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -48,8 +70,9 @@ class AddRoughModal extends Component {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             // When button submits form and form is in the process of submitting, submit button is disabled
             setSubmitting(true);
-            console.log("AddRoughModal -> render -> values", values);
-            this.props.close();
+
+            // console.log("AddRoughModal -> render -> values", values);
+            this.handelSubmit(values);
             // Simulate submitting to database, shows us values submitted, resets form
             setTimeout(() => {
               // alert(JSON.stringify(values, null, 2));
@@ -175,14 +198,14 @@ class AddRoughModal extends Component {
                 <p style={{ display: "grid" }}>
                   Total Amount :{" "}
                   <span style={{ color: "#0D9F37" }}>
-                    {values.carat * values.rate} /-
+                    {(values.carat * values.rate).toFixed(2)}/-
                   </span>
                 </p>
               </div>
               <div className="bx--row top-margin-model-input">
                 <div className="bx--col-md-3">
                   <DateSelection
-                    dateFormat="d/m/Y"
+                    dateFormat="d/m/y"
                     datePickerType="single"
                     onChange={(date) => {
                       const basicDate = new Date(date);
@@ -239,7 +262,13 @@ class AddRoughModal extends Component {
                 {/* <div className="bx--col-md-2"> */}
                 <p style={{ display: "grid" }}>
                   Due Date :{" "}
-                  <span style={{ color: "#DA1E28" }}>00/00/2020</span>
+                  <span style={{ color: "#DA1E28" }}>
+                    {values.purchaseDate !== ""
+                      ? moment(values.purchaseDate, "DD-MM-YYYY")
+                          .add(values.paymentDays, "days")
+                          .format("DD-MM-YYYY")
+                      : "0000-00-00"}
+                  </span>
                 </p>
               </div>
               <div className="bx--modal-footer modal-custome-footer">

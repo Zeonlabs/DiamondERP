@@ -17,14 +17,13 @@ import {
   TableHeader,
   TableBody,
   // TableSelectRow,
-  TableCell,
+  // TableCell,
   Pagination,
-  Tabs,
-  Tab,
   // OverflowMenu,
   // OverflowMenuItem,
 } from "carbon-components-react";
-import { Add24, Edit20, Delete20, View20 } from "@carbon/icons-react";
+import { Add24 } from "@carbon/icons-react";
+import TableCells from "./TableCell";
 // import {
 //   Add20,
 //   ListDropdown24,
@@ -37,35 +36,36 @@ class PageTopSection extends Component {
     this.state = {
       rowData: this.props.rowData,
       headerData: this.props.column,
-      currentPage: 0,
+      currentPage: 1,
       dataPerPage: 10,
       currentPageData: [],
       cureentTab: 0,
+      // page:1
     };
   }
 
-  componentDidMount = () => {
-    this.setState({
-      currentPage: 1,
-    });
-  };
+  // componentDidMount = () => {
+  //   this.setState({
+  //     currentPage: 1,
+  //   });
+  // };
 
   componentDidUpdate = (prevProps, prevState) => {
-    console.log(
-      "PageTopSection -> componentDidUpdate -> prevState.currentPage",
-      prevState.currentPage
-    );
-    if (prevState.currentPage !== this.state.currentPage) {
-      const username = this.state.rowData || [];
-      const { currentPage, dataPerPage } = this.state;
-      const indexOfLastTodo = currentPage * dataPerPage;
-      const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
-      const currentPageData = username.slice(indexOfFirstTodo, indexOfLastTodo);
-      this.setState({
-        currentPageData,
-      });
-      console.log("this ia a s array data", currentPageData);
-    }
+    // console.log(
+    //   "PageTopSection -> componentDidUpdate -> prevState.currentPage",
+    //   prevState.currentPage
+    // );
+    // if (prevState.currentPage !== this.state.currentPage) {
+    //   const username = this.state.rowData || [];
+    //   const { currentPage, dataPerPage } = this.state;
+    //   const indexOfLastTodo = currentPage * dataPerPage;
+    //   const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
+    //   const currentPageData = username.slice(indexOfFirstTodo, indexOfLastTodo);
+    //   this.setState({
+    //     currentPageData,
+    //   });
+    //   console.log("this ia a s array data", this.props.rowData);
+    // }
   };
 
   handelTab = (e) => {
@@ -111,10 +111,11 @@ class PageTopSection extends Component {
   };
 
   onChange = (e) => {
-    console.log("PageTopSection -> onChange -> e", e);
+    console.log("PageTopSection -> onChansadasdage -> e", e);
     this.setState({
       currentPage: e.page,
     });
+    this.props.pageSize(e.page);
   };
 
   pageRangeText = (current, total) => {
@@ -135,9 +136,10 @@ class PageTopSection extends Component {
     return (
       <div className="pagetop-wrapper">
         <DataTable
-          rows={this.state.currentPageData}
+          rows={this.state.rowData}
           headers={this.state.headerData}
           // size="short"
+          // isSortable
           overflowMenuOnHover={false}
           render={({
             rows,
@@ -171,15 +173,7 @@ class PageTopSection extends Component {
               Download
             </TableBatchAction>
           </TableBatchAction> */}
-                {this.props.tabview ? (
-                  <Tabs onSelectionChange={this.handelTab}>
-                    <Tab id="1" label="Rough"></Tab>
-                    <Tab id="2" label="Sub Packets"></Tab>
-                    <Tab id="3" label="Return Packets"></Tab>
-                  </Tabs>
-                ) : (
-                  ""
-                )}
+
                 <TableToolbarContent className="tollbar-content">
                   <TableToolbarSearch
                     tabIndex={
@@ -243,36 +237,50 @@ class PageTopSection extends Component {
                     {rows.map((row) => (
                       <>
                         <TableRow {...getRowProps({ row })}>
-                          {row.cells.map((cell) =>
-                            cell.info.header === "btn" ? (
-                              <TableCell key={cell.id}>
-                                <div className="action-wrapper">
-                                  <Edit20
-                                    className="edit-in-table"
-                                    onClick={() =>
-                                      this.handelOnEditClick(cell.id)
-                                    }
-                                  />
-                                  <div className="devider"></div>
-                                  <Delete20
-                                    className="delete-in-table"
-                                    onClick={() =>
-                                      this.handelOnDeleteClick(cell.id)
-                                    }
-                                  />
-                                </div>
-                              </TableCell>
-                            ) : cell.info.header === "id" ? (
-                              <TableCell key={cell.id}>
-                                <View20
-                                  className="view-in-table"
-                                  onClick={() => this.handelViewButton(cell.id)}
-                                />
-                              </TableCell>
-                            ) : (
-                              // console.log("PageTopSection -> cell", cell)
-                              <TableCell key={cell.id}>{cell.value}</TableCell>
+                          {row.cells.map(
+                            (cell) => (
+                              <TableCells
+                                handelOnEditClick={this.handelOnEditClick}
+                                handelOnDeleteClick={this.handelOnDeleteClick}
+                                handelViewButton={this.handelViewButton}
+                                header={cell}
+                              />
                             )
+                            // cell.info.header === "btn" ? (
+                            //   <TableCell key={cell.id}>
+                            //     <div className="action-wrapper">
+                            //       {/* {console.log(
+                            //         "this is a information of row",
+                            //         row,
+                            //         "sdaasdasdasdas",
+                            //         cell
+                            //       )} */}
+                            //       <Edit20
+                            //         className="edit-in-table"
+                            //         onClick={() =>
+                            //           this.handelOnEditClick(cell.id)
+                            //         }
+                            //       />
+                            //       <div className="devider"></div>
+                            //       <Delete20
+                            //         className="delete-in-table"
+                            //         onClick={() =>
+                            //           this.handelOnDeleteClick(cell.id)
+                            //         }
+                            //       />
+                            //     </div>
+                            //   </TableCell>
+                            // ) : cell.info.header === "id" ? (
+                            //   <TableCell key={cell.id}>
+                            //     <View20
+                            //       className="view-in-table"
+                            //       onClick={() => this.handelViewButton(cell.id)}
+                            //     />
+                            //   </TableCell>
+                            // ) : (
+                            //   // console.log("PageTopSection -> cell", cell)
+                            //   <TableCell key={cell.id}>{cell.value}</TableCell>
+                            // )
                           )}
                         </TableRow>
                       </>
@@ -283,31 +291,22 @@ class PageTopSection extends Component {
             </TableContainer>
           )}
         />
-        <div
-          style={
-            {
-              // maxWidth: "800px",
-            }
-          }
-        >
+        <div className="pagination-wrapper">
+          {console.log(
+            "this is  a log for a apagination ---->",
+            this.state.currentPage
+          )}
+
           <Pagination
             backwardText="Previous page"
-            disabled={false}
             forwardText="Next page"
-            isLastPage={false}
-            itemRangeText={this.itemRangeText}
-            itemText={this.itemText}
             itemsPerPageText="Items per page:"
-            onChange={this.onChange}
-            page={1}
-            pageInputDisabled={false}
+            page={this.props.totalData.currentPage}
             pageNumberText="Page Number"
-            pageRangeText={this.pageRangeText}
             pageSize={10}
             pageSizes={[10]}
-            pageText={this.pageText}
-            pagesUnknown={false}
-            totalItems={this.state.rowData.length}
+            totalItems={this.props.totalData.totalCount}
+            onChange={this.onChange}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "carbon-components-react";
-import TabView from "./Tabs";
+// import TabView from "./Tabs";
 
 class SellerModal extends Component {
   constructor(props) {

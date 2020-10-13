@@ -1,6 +1,7 @@
 import axios from "axios";
+// import { Notification } from "carbon-components";
 import qs from "qs";
-import { message } from "antd";
+// import { message } from "antd";
 import { baseUrl } from "./Helper";
 
 const GET = "GET";
@@ -63,7 +64,7 @@ export const showErrorAsToast = (error, type) => {
             // message.error(errors[x][y]);
           });
         } else if (Array.isArray(errors[x])) {
-          errors[x].map((e) => message.error(e));
+          errors[x].map((e) => console.error(e));
         }
       });
     }

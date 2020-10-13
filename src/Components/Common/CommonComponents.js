@@ -3,7 +3,7 @@ import {
   TextInput,
   DatePicker,
   DatePickerInput,
-  Dropdown,
+  // Dropdown,
   ComboBox,
 } from "carbon-components-react";
 
@@ -33,7 +33,7 @@ export default TextField;
 export const DateSelection = (props) => {
   return (
     <DatePicker
-      dateFormat={props.dateFormat}
+      dateFormat="y-m-d"
       datePickerType={props.datePickerType}
       light
       id={props.dateid}
