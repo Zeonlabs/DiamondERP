@@ -77,6 +77,7 @@ const sortingCreate = async (req, res) => {
 
   const unUsed = await Unused.findOne({ rough_id: body.rough_id });
   const rough = await Rough.findOne({ _id: body.rough_id });
+  console.log("sortingCreate -> rough", rough);
   const sortingDetails = await Sorting.findOne({ rough_id: body.rough_id });
   console.log("sortingCreate -> sortingDetaildsfdfs", unUsed);
 
@@ -108,7 +109,8 @@ const sortingCreate = async (req, res) => {
           $set: {
             copyCarat: unUsed.copyCarat - total_sorting_carat,
             after_sorting_carat:
-              unUsed.after_sorting_carat - total_sorting_carat,
+              unUsed.after_sorting_carat ||
+              unUsed.copyCarat - total_sorting_carat,
           },
         }
       );

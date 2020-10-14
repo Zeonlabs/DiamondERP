@@ -39,7 +39,6 @@ export const OfficeRough = [
     key: "return_date",
     // size: "200px",
   },
-
   {
     header: "Action",
     key: "btn",

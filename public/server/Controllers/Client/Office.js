@@ -1,15 +1,17 @@
 const Rough = require("../../models/Rough");
 const Office = require("../../Models/Office");
 const Unused = require("../../Models/Unused");
+const { v4: uuidv4 } = require("uuid");
 
 const create = async (req, res) => {
   const body = req.body;
   console.log("create -> body", body);
-
+  const id = uuidv4();
   const unUsed = await Unused.findOne({ rough_id: body.rough_id });
   const rough = await Rough.findOne({ _id: body.rough_id });
   const officePacket = new Office({
     ...body,
+    id,
     copyCarat: body.office_total_carat,
     carat: rough.carat,
     packetNo: 0,

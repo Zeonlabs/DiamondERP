@@ -164,6 +164,7 @@ const Sidebar = (props) => {
                           tabview={props.tabview}
                           pageSize={props.pageSize}
                           totalData={props.totalData}
+                          cureentTab={props.cureentTab}
                         />
                       )}
                       {props.children}

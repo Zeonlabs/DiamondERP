@@ -7,6 +7,7 @@ const objSchema = mongoose.Schema(
       ref: "Offices",
       required: true,
     },
+    id: String,
     sawing_manager_name: String,
     sawing_issueCarat: Number,
     sawing_issuePcs: Number,

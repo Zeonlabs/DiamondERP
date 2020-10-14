@@ -92,7 +92,7 @@ class PageTopSection extends Component {
   };
 
   handelViewButton = (id) => {
-    // console.log("PageTopSection -> handelViewButton -> id", id);
+    console.log("PageTopSection -> handelViewButton -> id", id);
     const split = id.split(":");
     // console.log("PageTopSection -> handelViewButton -> split", split);
     const singleData = this.state.rowData.find((data) => data.id === split[0]);

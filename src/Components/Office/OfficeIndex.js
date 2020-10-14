@@ -22,6 +22,7 @@ class OfficeIndex extends Component {
         currentPage: 1,
       },
       tableData: [],
+      singleOfiiceData: "",
     };
   }
 
@@ -64,6 +65,15 @@ class OfficeIndex extends Component {
     });
   };
 
+  onModelPopup = (data) => {
+    console.log("OfficeIndex -> onModelPopup -> data", data);
+
+    this.setState({
+      singleOfiiceData: data,
+      model: true,
+    });
+  };
+
   onPageChange = (page) => {
     console.log("RoughIndex -> onPageChange -> page", page);
     // this.setState({
@@ -97,7 +107,12 @@ class OfficeIndex extends Component {
       {
         id: "1",
         lebal: "Create Packet",
-        tabContent: <CreateOfficePacket close={this.closeModal} />,
+        tabContent: (
+          <CreateOfficePacket
+            close={this.closeModal}
+            // data={this.state.singleOfiiceData}
+          />
+        ),
       },
       {
         id: "2",
@@ -114,6 +129,7 @@ class OfficeIndex extends Component {
       <Sidebar
         title="Office"
         button="Create Packet"
+        cureentTab={2}
         onClick={this.onModelPopup}
         addButtonFunction={this.handelAddDataModal}
         rowData={this.state.tableData}
@@ -127,6 +143,7 @@ class OfficeIndex extends Component {
           open={this.state.model}
           close={this.closeModal}
           tabContent={tabArray}
+          // data={this.state.singleOfiiceData}
         />
       </Sidebar>
     );

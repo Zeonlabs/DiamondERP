@@ -13,6 +13,7 @@ const objSchema = mongoose.Schema(
     assign_date: Date,
     return_date: Date,
     carat: Number,
+    id: String,
     total_packet: Number,
     copyCarat: Number,
     packetNo: Number,

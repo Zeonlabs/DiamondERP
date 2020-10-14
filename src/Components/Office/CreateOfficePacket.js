@@ -37,6 +37,7 @@ class CreateOfficePacket extends Component {
   };
 
   render() {
+    // console.log("SAdasassadasdas------------------------>", this.props.data);
     return (
       <div style={{ marginBottom: "15%" }}>
         <Formik

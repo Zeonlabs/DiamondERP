@@ -2,13 +2,15 @@ const Rough = require("../../models/Rough");
 const Office = require("../../Models/Office");
 const OfficePacket = require("../../Models/OfficePacket");
 const moment = require("moment");
+const { v4: uuidv4 } = require("uuid");
 // const Unused = require("../../Models/Unused");
 
 const create = async (req, res) => {
   const body = req.body;
   // console.log("create -> body", body);
-
+  const id = uuidv4();
   const office = await Office.findOne({ _id: body.office_id });
+  console.log("create -> office", office);
 
   const officeOnePacket = await OfficePacket.findOne({
     office_id: body.office_id,
@@ -59,6 +61,7 @@ const create = async (req, res) => {
       }
     } else {
       const data = {
+        id,
         office_id: body.office_id,
         sawing_manager_name: body.manager_name || "noName",
         sawing_issueCarat: body.issueCarat || 0.0,
@@ -138,6 +141,7 @@ const create = async (req, res) => {
       }
     } else {
       const data = {
+        id,
         office_id: body.office_id,
         chapka_manager_name: body.manager_name || "noName",
         chapka_issueCarat: body.issueCarat || 0.0,
@@ -165,6 +169,7 @@ const create = async (req, res) => {
               {
                 $set: {
                   copyCarat: office.copyCarat - body.issueCarat,
+                  packetNo: office.packetNo + 1,
                 },
               }
             );
