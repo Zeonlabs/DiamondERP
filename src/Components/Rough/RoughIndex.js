@@ -30,6 +30,8 @@ class RoughIndex extends Component {
       },
       caratList: [],
       sortingData: [],
+      singleOfiiceData: "",
+      subPacketModel: false,
     };
   }
 
@@ -71,6 +73,14 @@ class RoughIndex extends Component {
     console.log("log in a close modal");
     this.setState({
       model: false,
+    });
+  };
+
+  onModelPopup = (data) => {
+    this.setState({
+      singleOfiiceData: data,
+      subPacketModel: true,
+      // model: true,
     });
   };
 

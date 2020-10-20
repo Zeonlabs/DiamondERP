@@ -97,6 +97,7 @@ class PageTopSection extends Component {
     // console.log("PageTopSection -> handelViewButton -> split", split);
     const singleData = this.state.rowData.find((data) => data.id === split[0]);
     console.log("View button press", singleData);
+    this.props.onClick(singleData);
   };
 
   itemRangeText = (min, max, total) => {
@@ -201,20 +202,24 @@ class PageTopSection extends Component {
                       Action 3
                     </TableToolbarAction>
                   </TableToolbarMenu>
-                  <Button
-                    tabIndex={
-                      getBatchActionProps().shouldShowBatchActions ? -1 : 0
-                    }
-                    onClick={this.props.handelAddData}
-                    size="small"
-                    kind="primary"
-                    className="add-data-button"
-                  >
-                    {this.state.cureentTab === 2
-                      ? "Return Packet"
-                      : this.props.button}
-                    <Add24 />
-                  </Button>
+                  {this.props.noButton ? (
+                    ""
+                  ) : (
+                    <Button
+                      tabIndex={
+                        getBatchActionProps().shouldShowBatchActions ? -1 : 0
+                      }
+                      onClick={this.props.handelAddData}
+                      size="small"
+                      kind="primary"
+                      className="add-data-button"
+                    >
+                      {this.state.cureentTab === 2
+                        ? "Return Packet"
+                        : this.props.button}
+                      <Add24 />
+                    </Button>
+                  )}
                 </TableToolbarContent>
               </TableToolbar>
               <div className="table-wrapper">

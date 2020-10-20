@@ -44,16 +44,16 @@ export const RoughColumn = [
     key: "lastdate",
     // size: "50px",
   },
-  {
-    header: "Office",
-    key: "officecarat",
-    // size: "50px",
-  },
-  {
-    header: "Factory",
-    key: "factorycarat",
-    // size: "155px",
-  },
+  // {
+  //   header: "Office",
+  //   key: "officecarat",
+  //   // size: "50px",
+  // },
+  // {
+  //   header: "Factory",
+  //   key: "factorycarat",
+  //   // size: "155px",
+  // },
 
   {
     header: "Action",

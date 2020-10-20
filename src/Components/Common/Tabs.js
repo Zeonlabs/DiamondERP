@@ -14,7 +14,8 @@ class TabView extends Component {
         <Tabs
           role="navigation"
           className="tab-wrapper"
-          selected={0}
+          selected={this.props.tabSelected || 0}
+          onSelectionChange={this.props.handelModelTabChange}
           selectionMode="automatic"
         >
           {this.props.tabContent.map((value) => (

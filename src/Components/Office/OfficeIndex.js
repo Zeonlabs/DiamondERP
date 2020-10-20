@@ -7,7 +7,20 @@ import ReturnOfficeRough from "./ReturnOfficeRough";
 // import { TableData } from "../Common/TableData";
 import { OfficeRough } from "../Collumn/Office/OfficeRough";
 import { connect } from "react-redux";
-import { getOfficeList } from "../../Actions/Office";
+import {
+  getOfficeList,
+  getOfficeSubList,
+  getpacketSrNo,
+  createSubPacket,
+  returnOfficePacket,
+} from "../../Actions/Office";
+import { ChapkaList } from "./SubPacket/ChapkaList";
+import { SawingList } from "./SubPacket/SawingList";
+import {
+  OfficeSawingSubPackets,
+  OfficeSubPackets,
+} from "../Collumn/Office/OfficeSubpackets";
+import { getRoughPrefrence } from "../../Actions/Rough";
 
 class OfficeIndex extends Component {
   constructor(props) {
@@ -15,14 +28,26 @@ class OfficeIndex extends Component {
 
     this.state = {
       model: false,
+      subPacketModel: false,
       pageinationRef: {
         totalCount: 0,
         limit: 10,
         skip: 0,
         currentPage: 1,
       },
+      subPacketpageinationRef: {
+        totalCount: 0,
+        limit: 10,
+        skip: 0,
+        currentPage: 1,
+      },
       tableData: [],
-      singleOfiiceData: "",
+      subPacketData: [],
+      officeSubId: "",
+      tabSelected: 0,
+      roughList: [],
+      officeIdList: [],
+      srno: 0,
     };
   }
 
@@ -43,6 +68,15 @@ class OfficeIndex extends Component {
         });
       })
       .catch((e) => console.log(e));
+    this.props
+      .getRoughPrefrence()
+      .then((res) => {
+        console.log("OfficeIndex -> componentDidMount -> res", res);
+        this.setState({
+          roughList: res.commonGet.caratList,
+        });
+      })
+      .catch((e) => console.log(e));
 
     // this.props.getRoughPrefrence().then((res) => {
     //   console.log("RoughIndex -> componentDidMount -> res", res);
@@ -56,6 +90,8 @@ class OfficeIndex extends Component {
     // console.log("log in a close modal");
     this.setState({
       model: false,
+      subPacketModel: false,
+      tabSelected: 0,
     });
   };
 
@@ -66,12 +102,82 @@ class OfficeIndex extends Component {
   };
 
   onModelPopup = (data) => {
-    console.log("OfficeIndex -> onModelPopup -> data", data);
-
+    // console.log("OfficeIndex -> onModelPopup -> data", data);
+    const value = {
+      ...this.state.subPacketpageinationRef,
+      id: data,
+      type: "chapka",
+    };
+    this.props
+      .getOfficeSubList(value)
+      .then((res) =>
+        this.setState({
+          subPacketData: res.data,
+          subPacketpageinationRef: {
+            ...this.state.subPacketpageinationRef,
+            totalCount: res.count,
+          },
+        })
+      )
+      .catch((e) => console.log(e));
     this.setState({
-      singleOfiiceData: data,
+      subPacketModel: true,
       model: true,
+      officeSubId: data,
     });
+  };
+
+  handelModelTabChange = (e) => {
+    const value = {
+      ...this.state.subPacketpageinationRef,
+      id: this.state.officeSubId._id,
+      type: e === 0 ? "chapka" : "sawing",
+    };
+    console.log("OfficeIndex -> handelModelTabChange -> value", value, e);
+    this.props
+      .getOfficeSubList(value)
+      .then((res) =>
+        this.setState({
+          subPacketData: res.data,
+          subPacketpageinationRef: {
+            ...this.state.subPacketpageinationRef,
+            totalCount: res.count,
+          },
+          tabSelected: e,
+        })
+      )
+      .catch((e) => console.log(e));
+  };
+
+  handleCreateSubpacket = (data) => {
+    console.log("OfficeIndex -> handleCreateSubpacket -> data", data);
+    this.props
+      .createSubPacket(data)
+      .then((res) =>
+        console.log("OfficeIndex -> handleCreateSubpacket -> res", res)
+      )
+      .catch((e) => console.log(e));
+  };
+
+  // handelOfficeCaratList = (data) => {
+  //   // console.log("OfficeIndex -> handelOfficeCaratList -> data", data);
+  //   this.props
+  //     .getRoughPrefrence({ roughId: data })
+  //     .then((res) => {
+  //       console.log("OfficeIndex -> componentDidMount -> res", res);
+  //       this.setState({
+  //         officeIdList: res.commonGet.officeDetails,
+  //       });
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
+
+  handelReturnOffice = (data) => {
+    console.log("OfficeIndex -> handelReturnOffice -> data", data);
+    // this.props
+    //   .returnOfficePacket(data)
+    //   .then((res) => console.log(res))
+    //   .catch((e) => console.log(e));
   };
 
   onPageChange = (page) => {
@@ -110,6 +216,8 @@ class OfficeIndex extends Component {
         tabContent: (
           <CreateOfficePacket
             close={this.closeModal}
+            caratList={this.state.roughList}
+            handleCreateSubpacket={this.handleCreateSubpacket}
             // data={this.state.singleOfiiceData}
           />
         ),
@@ -117,12 +225,54 @@ class OfficeIndex extends Component {
       {
         id: "2",
         lebal: "Return Packet",
-        tabContent: <ReturnOfficePacket close={this.closeModal} />,
+        tabContent: (
+          <ReturnOfficePacket
+            close={this.closeModal}
+            caratList={this.state.roughList}
+            handleCreateSubpacket={this.handleCreateSubpacket}
+          />
+        ),
       },
       {
         id: "3",
         lebal: "Return Rough",
-        tabContent: <ReturnOfficeRough close={this.closeModal} />,
+        tabContent: (
+          <ReturnOfficeRough
+            close={this.closeModal}
+            caratList={this.state.roughList}
+            handelReturnOffice={this.handelReturnOffice}
+          />
+        ),
+      },
+    ];
+
+    const subPacket = [
+      {
+        id: "1",
+        lebal: "Chapka",
+        tabContent: (
+          <ChapkaList
+            close={this.closeModal}
+            rowData={this.state.subPacketData}
+            column={OfficeSubPackets}
+            pageSize={this.onPageChange}
+            totalData={this.state.subPacketpageinationRef}
+            // data={this.state.singleOfiiceData}
+          />
+        ),
+      },
+      {
+        id: "2",
+        lebal: "Sawing",
+        tabContent: (
+          <SawingList
+            close={this.closeModal}
+            rowData={this.state.subPacketData}
+            column={OfficeSawingSubPackets}
+            pageSize={this.onPageChange}
+            totalData={this.state.subPacketpageinationRef}
+          />
+        ),
       },
     ];
     return (
@@ -134,7 +284,7 @@ class OfficeIndex extends Component {
         addButtonFunction={this.handelAddDataModal}
         rowData={this.state.tableData}
         column={OfficeRough}
-        tabview={true}
+        // tabview={true}
         pageSize={this.onPageChange}
         totalData={this.state.pageinationRef}
       >
@@ -142,7 +292,9 @@ class OfficeIndex extends Component {
           modalName="Office Packet Details"
           open={this.state.model}
           close={this.closeModal}
-          tabContent={tabArray}
+          handelModelTabChange={this.handelModelTabChange}
+          tabContent={this.state.subPacketModel === true ? subPacket : tabArray}
+          tabSelected={this.state.tabSelected}
           // data={this.state.singleOfiiceData}
         />
       </Sidebar>
@@ -152,4 +304,11 @@ class OfficeIndex extends Component {
 
 const mapStateToProps = (state) => ({ ...state.Test });
 
-export default connect(mapStateToProps, { getOfficeList })(OfficeIndex);
+export default connect(mapStateToProps, {
+  getOfficeList,
+  getOfficeSubList,
+  getRoughPrefrence,
+  getpacketSrNo,
+  createSubPacket,
+  returnOfficePacket,
+})(OfficeIndex);

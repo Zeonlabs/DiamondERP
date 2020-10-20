@@ -19,4 +19,5 @@ export const rough = {
 
 export const office = {
   officeGet: "VIEW_Office",
+  officeSubGet: "VIEW_Office_SUB_PACKET",
 };

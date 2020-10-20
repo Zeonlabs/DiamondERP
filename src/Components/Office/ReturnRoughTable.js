@@ -27,7 +27,6 @@ class ReturnRoughTable extends Component {
       outCarat,
       outPrice,
     } = this.props.value;
-    console.log("SortigTable -> constructor -> props", this.props);
     return (
       <div className="sorting-table-wrapper">
         <table>
@@ -171,7 +170,7 @@ class ReturnRoughTable extends Component {
             <td>Laser</td>
             <td>
               <input
-                name="crystalCarat"
+                name="laserCarat"
                 value={laserCarat}
                 onChange={this.props.handelOnChange}
                 type="number"
@@ -181,7 +180,7 @@ class ReturnRoughTable extends Component {
             </td>
             <td>
               <input
-                name="crystalPrice"
+                name="laserPrice"
                 value={laserPrice}
                 onChange={this.props.handelOnChange}
                 type="number"
@@ -197,7 +196,7 @@ class ReturnRoughTable extends Component {
             <td>Ghat</td>
             <td>
               <input
-                name="crystalCarat"
+                name="ghatCarat"
                 value={ghatCarat}
                 onChange={this.props.handelOnChange}
                 type="number"
@@ -207,7 +206,7 @@ class ReturnRoughTable extends Component {
             </td>
             <td>
               <input
-                name="crystalPrice"
+                name="ghatPrice"
                 value={ghatPrice}
                 onChange={this.props.handelOnChange}
                 type="number"
@@ -223,7 +222,7 @@ class ReturnRoughTable extends Component {
             <td>Makeable</td>
             <td>
               <input
-                name="crystalCarat"
+                name="makeableCarat"
                 value={makeableCarat}
                 onChange={this.props.handelOnChange}
                 type="number"
@@ -233,7 +232,7 @@ class ReturnRoughTable extends Component {
             </td>
             <td>
               <input
-                name="crystalPrice"
+                name="makeablePrice"
                 value={makeablePrice}
                 onChange={this.props.handelOnChange}
                 type="number"

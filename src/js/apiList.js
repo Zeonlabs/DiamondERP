@@ -13,6 +13,10 @@ export const Rough = {
 export const Office = {
   assignOffice: { method: "POST", url: "/office/create" },
   getOffice: { method: "GET", url: "/office/view" },
+  getSubOffice: { method: "GET", url: "/office/subpacket/view" },
+  getOfficeSr: { method: "GET", url: "/common/getOfficeSrNo" },
+  createOfficePacket: { method: "POST", url: "/office/create/packet" },
+  returnOfficePacket: { method: "POST", url: "/office/return" },
   // getRough: { method: "GET", url: "/rough/view" },
   // getRoughPrefrence: { method: "GET", url: "/common/getList" },
   // getSortingData: { method: "GET", url: "/rough/sorting/view" },

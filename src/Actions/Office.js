@@ -8,8 +8,38 @@ export const getOfficeList = (id) => (dispatch) =>
     // console.log("TCL: data", id);
     fetchUrl(Office.getOffice.method, Office.getOffice.url, id)
       .then((res) => {
-        console.log("res", res);
+        // console.log("res", res);
         dispatch({ type: office.officeGet, payload: res.docs });
+        // dispatch({ type: listing.chequeTotal, payload: res });
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+
+export const getOfficeSubList = (id) => (dispatch) =>
+  new Promise((resolve, reject) => {
+    // console.log("TCL: data", id);
+    fetchUrl(Office.getSubOffice.method, Office.getSubOffice.url, id)
+      .then((res) => {
+        // console.log("res", res);
+        dispatch({ type: office.officeSubGet, payload: res.docs });
+        // dispatch({ type: listing.chequeTotal, payload: res });
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+
+export const getpacketSrNo = (id) => (dispatch) =>
+  new Promise((resolve, reject) => {
+    // console.log("TCL: data", id);
+    fetchUrl(Office.getOfficeSr.method, Office.getOfficeSr.url, id)
+      .then((res) => {
+        console.log("res", res);
+        // dispatch({ type: office.officeSubGet, payload: res.docs });
         // dispatch({ type: listing.chequeTotal, payload: res });
         resolve(res);
       })
@@ -60,19 +90,39 @@ export const assignOffice = (data) => (dispatch) =>
       });
   });
 
-// export const addSortingData = (data) => (dispatch) => {
-//   console.log("data", data);
-//   new Promise((resolve, reject) => {
-//     // console.log("TCL: data", data);
-//     fetchUrl(Rough.addSortingData.method, Rough.addSortingData.url, data)
-//       .then((res) => {
-//         resolve(res);
-//       })
-//       .catch((e) => {
-//         reject(e);
-//       });
-//   });
-// };
+export const createSubPacket = (data) => (dispatch) => {
+  new Promise((resolve, reject) => {
+    // console.log("TCL: data", data);
+    fetchUrl(
+      Office.createOfficePacket.method,
+      Office.createOfficePacket.url,
+      data
+    )
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
+
+export const returnOfficePacket = (data) => (dispatch) => {
+  new Promise((resolve, reject) => {
+    // console.log("TCL: data", data);
+    fetchUrl(
+      Office.returnOfficePacket.method,
+      Office.returnOfficePacket.url,
+      data
+    )
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
 
 // export const editCheque = (id, data) => dispatch =>
 //   new Promise((resolve, reject) => {

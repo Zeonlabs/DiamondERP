@@ -18,10 +18,10 @@ export const getRough = (id) => (dispatch) =>
       });
   });
 
-export const getRoughPrefrence = () => (dispatch) =>
+export const getRoughPrefrence = (id) => (dispatch) =>
   new Promise((resolve, reject) => {
     // console.log("TCL: data", id);
-    fetchUrl(Rough.getRoughPrefrence.method, Rough.getRoughPrefrence.url)
+    fetchUrl(Rough.getRoughPrefrence.method, Rough.getRoughPrefrence.url, id)
       .then((res) => {
         // console.log("res", res);
         dispatch({ type: rough.roughPreference, payload: res.docs });

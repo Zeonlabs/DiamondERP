@@ -33,18 +33,12 @@ export default class TableCells extends Component {
           </TableCell>
         );
       case "date":
-        return (
-          <TableCell key={cell.id}>
-            {moment(cell.value).format("DD-MM-YYYY")}
-          </TableCell>
-        );
       case "lastdate":
-        return (
-          <TableCell key={cell.id}>
-            {moment(cell.value).format("DD-MM-YYYY")}
-          </TableCell>
-        );
       case "assign_date":
+      case "sawing_assign_date":
+      case "chapka_assign_date":
+      case "sawing_return_date":
+      case "chapka_return_date":
         return (
           <TableCell key={cell.id}>
             {moment(cell.value).format("DD-MM-YYYY")}

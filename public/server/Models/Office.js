@@ -11,6 +11,7 @@ const objSchema = mongoose.Schema(
     office_total_piece: Number,
     office_assigne_name: String,
     assign_date: Date,
+    returnStatus: Boolean,
     return_date: Date,
     carat: Number,
     id: String,

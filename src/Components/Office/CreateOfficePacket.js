@@ -6,6 +6,10 @@ import TextField, {
   DateSelection,
   DropDownSelection,
 } from "../Common/CommonComponents";
+import { connect } from "react-redux";
+import { getRoughPrefrence } from "../../Actions/Rough";
+import { getpacketSrNo } from "../../Actions/Office";
+import moment from "moment";
 // import { Tab } from "carbon-components-react";
 // import TabView from "../Common/Tabs";
 
@@ -13,30 +17,86 @@ const validationSchema = Yup.object().shape({
   // officeIssueassigneName: Yup.string().required("*Assign Id is required"),
   // roughName: Yup.string().required("*Rough Name is required"),
   officeIssuecarat: Yup.string().required("*carat is required"),
-  officeIssuepiece: Yup.string().required("*Piece is required"),
+  // officeIssuepiece: Yup.string().required("*Piece is required"),
   officeIssueprocessName: Yup.string().required("*Process Name is required"),
   officeIssueassigneName: Yup.string().required("*Assign Name is required"),
   officePaketcreateDate: Yup.string().required("*Date is required"),
+  officeIssueRoughList: Yup.string().required("*Rough Id is required"),
+  officeIssueOfficeList: Yup.string().required("*Select Office Id"),
 });
 class CreateOfficePacket extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      officeIdList: [],
+      officeItems: [],
+      srno: 0,
+      remaining: 0,
+    };
   }
 
-  handelSubmit = (e) => {
-    console.log(e);
+  handelSubmit = (value) => {
+    const data = {
+      office_id: value.officeIssueOfficeList.id,
+      packet_status: value.officeIssueprocessName,
+      return: false,
+      manager_name: value.officeIssueassigneName,
+      issueCarat: value.officeIssuecarat,
+      assign_date: moment(value.officePaketcreateDate, "DD-MM-YYYY").format(
+        "YYYY-MM-DD"
+      ),
+    };
+    console.log("CreateOfficePacket -> handelSubmit -> data", data);
+    this.props.close();
+    this.props.handleCreateSubpacket(data);
   };
 
-  handelOnChange = (e) => {
-    console.log("AddRoughModal -> handelOnChange -> e", e.target);
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+  handelChangeRough = (data) => {
+    // console.log("CreateOfficePacket -> handelChangeRough -> data", data);
+    // this.props.roughOnChange(data.id);
+    this.props
+      .getRoughPrefrence({ roughId: data === null ? 0 : data.id })
+      .then((res) => {
+        console.log("CreateOfficePacket -> handelChangeRough -> res", res);
+        this.setState({
+          officeIdList: res.commonGet.officeDetails,
+        });
+      })
+      .catch((e) => console.log(e));
+  };
+
+  handleOfficeSrno = (data) => {
+    const remaining = this.state.officeIdList.find(
+      (value) => data.id === value._id
+    );
+    // this.props.roughOnChange(data.id);
+    this.props
+      .getpacketSrNo({ officeId: data === null ? 0 : data.id })
+      .then((res) => {
+        console.log("CreateOfficePacket -> handleOfficeSrno -> res", res);
+        this.setState({
+          srno: res.packetSrNo[0].packetNo,
+          remaining: remaining.copyCarat,
+        });
+      })
+      .catch((e) => console.log(e));
   };
 
   render() {
+    let items = [];
+    this.props.caratList.map((value) =>
+      items.push({ id: value._id, label: value.carat.toString() })
+    );
+    let officeItem = [];
+    this.state.officeIdList.map((value) =>
+      officeItem.push({
+        id: value._id,
+        label: value.office_total_carat
+          ? value.office_total_carat.toString()
+          : "no Data",
+      })
+    );
     // console.log("SAdasassadasdas------------------------>", this.props.data);
     return (
       <div style={{ marginBottom: "15%" }}>
@@ -45,17 +105,20 @@ class CreateOfficePacket extends Component {
             officeIssueassigneName: "",
             // roughName: "",
             officeIssuecarat: "",
-            officeIssuepiece: "",
+            // officeIssuepiece: "",
             officeIssueprocessName: "",
             // officeIssueassigneName: "",
             officePaketcreateDate: "",
+            officeIssueRoughList: "",
+            officeIssueOfficeList: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             // When button submits form and form is in the process of submitting, submit button is disabled
             setSubmitting(true);
             console.log("AddRoughModal -> render -> values", values);
-            this.props.close();
+            this.handelSubmit(values);
+
             // Simulate submitting to database, shows us values submitted, resets form
             // setTimeout(() => {
             //   // alert(JSON.stringify(values, null, 2));
@@ -75,10 +138,90 @@ class CreateOfficePacket extends Component {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <h5 className="h5-form-label">
-                Packet Id : <span style={{ color: "#0F61FD" }}>#PID001</span>
-              </h5>
               <div className="bx--row">
+                <div className="bx--col-md-3">
+                  <DropDownSelection
+                    className={
+                      touched.officeIssueRoughList &&
+                      errors.officeIssueRoughList
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="officeIssueRoughList"
+                    selectedItem={values.officeIssueRoughList}
+                    value={values.officeIssueRoughList}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="office-rough-list-issue"
+                    items={items}
+                    label="Select Rough"
+                    light
+                    onChange={(select) => {
+                      setFieldValue(
+                        "officeIssueRoughList",
+                        select.selectedItem
+                      );
+                      this.handelChangeRough(select.selectedItem);
+                      // this.props.roughOnChange(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                      // this.props.selectedId(select.selectedItem.id);
+                      // this.handelSelectedId(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                    }}
+                    titleText="Rough"
+                    type="default"
+                  />
+                  {touched.officeIssueRoughList &&
+                  errors.officeIssueRoughList ? (
+                    <div className="error-message">
+                      {errors.officeIssueRoughList}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="bx--col-md-3">
+                  <DropDownSelection
+                    className={
+                      touched.officeIssueOfficeList &&
+                      errors.officeIssueOfficeList
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="officeIssueOfficeList"
+                    selectedItem={values.officeIssueOfficeList}
+                    value={values.officeIssueOfficeList}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="order-buyer-name"
+                    items={officeItem}
+                    label="Select Office Packet"
+                    light
+                    onChange={(select) => {
+                      setFieldValue(
+                        "officeIssueOfficeList",
+                        select.selectedItem
+                      );
+                      this.handleOfficeSrno(select.selectedItem);
+                      // this.props.selectedId(select.selectedItem.id);
+                      // this.handelSelectedId(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                    }}
+                    titleText="Office Packet"
+                    type="default"
+                  />
+                  {touched.officeIssueOfficeList &&
+                  errors.officeIssueOfficeList ? (
+                    <div className="error-message">
+                      {errors.officeIssueOfficeList}
+                    </div>
+                  ) : null}
+                </div>
+                <h5 className="h5-form-label">
+                  Packet No :{" "}
+                  <span style={{ color: "#0F61FD" }}>{this.state.srno}</span>
+                </h5>
+              </div>
+              <div className="bx--row top-margin-model-input">
                 <div className="bx--col-md-3">
                   <DateSelection
                     dateFormat="d/m/Y"
@@ -91,6 +234,7 @@ class CreateOfficePacket extends Component {
                         (basicDate.getMonth() + 1) +
                         "/" +
                         basicDate.getFullYear();
+
                       setFieldValue("officePaketcreateDate", formateDate);
                     }}
                     id="office-packet-create-date"
@@ -216,7 +360,38 @@ class CreateOfficePacket extends Component {
                   ) : null}
                 </div>
                 <div className="bx--col-md-3">
-                  <TextField
+                  <DropDownSelection
+                    className={
+                      touched.officeIssueprocessName &&
+                      errors.officeIssueprocessName
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="officeIssueprocessName"
+                    selectedItem={values.officeIssueprocessName}
+                    value={values.officeIssueprocessName}
+                    direction="top"
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="process-name-office"
+                    items={["sawing", "chapka"]}
+                    label="Select Process name"
+                    light
+                    onChange={(select) =>
+                      setFieldValue(
+                        "officeIssueprocessName",
+                        select.selectedItem
+                      )
+                    }
+                    titleText="Process Name"
+                    type="default"
+                  />
+                  {touched.officeIssueprocessName &&
+                  errors.officeIssueprocessName ? (
+                    <div className="error-message">
+                      {errors.officeIssueprocessName}
+                    </div>
+                  ) : null}
+                  {/* <TextField
                     className={
                       touched.officeIssuepiece && errors.officeIssuepiece
                         ? "error"
@@ -240,54 +415,17 @@ class CreateOfficePacket extends Component {
                     <div className="error-message">
                       {errors.officeIssuepiece}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </div>
                 <p style={{ display: "grid" }}>
                   Available Carat :{" "}
-                  <span style={{ color: "#DA1E28" }}>00.00</span>
+                  <span style={{ color: "#DA1E28" }}>
+                    {this.state.remaining}
+                  </span>
                 </p>
               </div>
               <div className="bx--row top-margin-model-input">
-                <div className="bx--col-md-3">
-                  <DropDownSelection
-                    className={
-                      touched.officeIssueprocessName &&
-                      errors.officeIssueprocessName
-                        ? "error"
-                        : "bx--col dropdown-padding"
-                    }
-                    name="officeIssueprocessName"
-                    selectedItem={values.officeIssueprocessName}
-                    value={values.officeIssueprocessName}
-                    direction="top"
-                    // itemToString={(item) => (item ? item.text : "")}
-                    id="process-name-office"
-                    items={[
-                      "Option 1",
-                      "Option 2",
-                      "Option 3",
-                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.",
-                      "Option 5",
-                      "Option 6",
-                    ]}
-                    label="Select Process name"
-                    light
-                    onChange={(select) =>
-                      setFieldValue(
-                        "officeIssueprocessName",
-                        select.selectedItem
-                      )
-                    }
-                    titleText="Process Name"
-                    type="default"
-                  />
-                  {touched.officeIssueprocessName &&
-                  errors.officeIssueprocessName ? (
-                    <div className="error-message">
-                      {errors.officeIssueprocessName}
-                    </div>
-                  ) : null}
-                </div>
+                <div className="bx--col-md-3"></div>
                 <div className="bx--col-md-3">
                   {/* <DropDownSelection
                     className={
@@ -347,5 +485,8 @@ class CreateOfficePacket extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({ ...state.Test });
 
-export default CreateOfficePacket;
+export default connect(mapStateToProps, { getRoughPrefrence, getpacketSrNo })(
+  CreateOfficePacket
+);

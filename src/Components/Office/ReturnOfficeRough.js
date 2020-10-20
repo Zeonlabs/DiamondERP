@@ -5,15 +5,18 @@ import * as Yup from "yup";
 // import TextField from "../Common/CommonComponents";
 // import { sumObjValuses } from "../../js/Helper";
 import ReturnRoughTable from "./ReturnRoughTable";
+import { DateSelection, DropDownSelection } from "../Common/CommonComponents";
+import { connect } from "react-redux";
+import { getRoughPrefrence } from "../../Actions/Rough";
 // import { Tab } from "carbon-components-react";
 // import TabView from "../Common/Tabs";
 
 const validationSchema = Yup.object().shape({
-  workPlace: Yup.string().required("*Work place is required"),
-  assignName: Yup.string().required("*Assign Name is required"),
-  carat: Yup.string().required("*carat is required"),
-  rate: Yup.string().required("*rate is required"),
-  piece: Yup.string().required("*piece is required"),
+  officeReturnCaratId: Yup.string().required("*Select Rough"),
+  officeReturnOfficeId: Yup.string().required("*Select Office packet"),
+  officePacketReturnDate: Yup.string().required("*Select Return Date"),
+  // rate: Yup.string().required("*rate is required"),
+  // piece: Yup.string().required("*piece is required"),
 });
 class ReturnOfficeRough extends Component {
   constructor(props) {
@@ -40,11 +43,12 @@ class ReturnOfficeRough extends Component {
       },
       sumOfCarat: 0,
       sumOfAmount: 0,
+      officeIdList: [],
     };
   }
 
-  handelSubmit = (e) => {
-    console.log(e);
+  handelSubmit = (value) => {
+    this.props.close();
   };
 
   handelOnChange = (e) => {
@@ -107,25 +111,49 @@ class ReturnOfficeRough extends Component {
     );
   };
 
+  handelChangeRough = (data) => {
+    this.props
+      .getRoughPrefrence({ roughId: data === null ? 0 : data.id })
+      .then((res) => {
+        console.log("CreateOfficePacket -> handelChangeRough -> res", res);
+        this.setState({
+          officeIdList: res.commonGet.officeDetails,
+        });
+      })
+      .catch((e) => console.log(e));
+  };
+
   handelData = () => {};
 
   render() {
+    let items = [];
+    this.props.caratList.map((value) =>
+      items.push({ id: value._id, label: value.carat.toString() })
+    );
+    let officeItem = [];
+    this.state.officeIdList.map((value) =>
+      officeItem.push({
+        id: value._id,
+        label: value.office_total_carat
+          ? value.office_total_carat.toString()
+          : "no Data",
+      })
+    );
     return (
       <div style={{ marginBottom: "5%" }}>
         <Formik
           initialValues={{
-            workPlace: "",
-            assignName: "",
-            carat: "",
-            rate: "",
-            piece: "",
+            officeReturnCaratId: "",
+            officeReturnOfficeId: "",
+            officePacketReturnDate: "",
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             // When button submits form and form is in the process of submitting, submit button is disabled
             setSubmitting(true);
-            console.log("AddRoughModal -> render -> values", values);
-            this.props.close();
+            // console.log("AddRoughModal -> render -> values", values);
+            this.handelSubmit(values);
+
             // Simulate submitting to database, shows us values submitted, resets form
             setTimeout(() => {
               // alert(JSON.stringify(values, null, 2));
@@ -145,16 +173,114 @@ class ReturnOfficeRough extends Component {
             isSubmitting,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <div className="assign-headding-wrapper">
-                <h5 className="h5-form-label">
-                  Rough Id : <span style={{ color: "#0F61FD" }}>#RID001</span>
-                </h5>
-                <h5 className="h5-form-label">
-                  Date : <span style={{ color: "#0F61FD" }}>20/03/2020</span>
-                </h5>
-                <h5 className="h5-form-label">
-                  Total Carat : <span style={{ color: "#0F61FD" }}>650.00</span>
-                </h5>
+              <div className="bx--row">
+                <div className="bx--col-md-2">
+                  <DropDownSelection
+                    className={
+                      touched.officeReturnCaratId && errors.officeReturnCaratId
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="officeReturnCaratId"
+                    selectedItem={values.officeReturnCaratId}
+                    value={values.officeReturnCaratId}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="office-rough-list-issue"
+                    items={items}
+                    label="Select Rough"
+                    light
+                    onChange={(select) => {
+                      setFieldValue("officeReturnCaratId", select.selectedItem);
+                      this.handelChangeRough(select.selectedItem);
+                      // this.props.roughOnChange(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                      // this.props.selectedId(select.selectedItem.id);
+                      // this.handelSelectedId(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                    }}
+                    titleText="Rough"
+                    type="default"
+                  />
+                  {touched.officeReturnCaratId && errors.officeReturnCaratId ? (
+                    <div className="error-message">
+                      {errors.officeReturnCaratId}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="bx--col-md-2">
+                  <DropDownSelection
+                    className={
+                      touched.officeReturnOfficeId &&
+                      errors.officeReturnOfficeId
+                        ? "error"
+                        : "bx--col dropdown-padding"
+                    }
+                    name="officeReturnOfficeId"
+                    selectedItem={values.officeReturnOfficeId}
+                    value={values.officeReturnOfficeId}
+                    // itemToString={(item) => (item ? item.text : "")}
+                    id="order-buyer-name"
+                    items={officeItem}
+                    label="Select Office Packet"
+                    light
+                    onChange={(select) => {
+                      setFieldValue(
+                        "officeReturnOfficeId",
+                        select.selectedItem
+                      );
+                      // this.props.selectedId(select.selectedItem.id);
+                      // this.handelSelectedId(
+                      //   select.selectedItem ? select.selectedItem.id : 0
+                      // );
+                    }}
+                    titleText="Office Packet"
+                    type="default"
+                  />
+                  {touched.officeReturnOfficeId &&
+                  errors.officeReturnOfficeId ? (
+                    <div className="error-message">
+                      {errors.officeReturnOfficeId}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="bx--col-md-3">
+                  <DateSelection
+                    dateFormat="d/m/Y"
+                    datePickerType="single"
+                    onChange={(date) => {
+                      const basicDate = new Date(date);
+                      const formateDate =
+                        basicDate.getDate() +
+                        "/" +
+                        (basicDate.getMonth() + 1) +
+                        "/" +
+                        basicDate.getFullYear();
+
+                      setFieldValue("officePacketReturnDate", formateDate);
+                    }}
+                    id="office-packet-create-date"
+                    placeholder="dd/mm/yyyy"
+                    labelText="Create packet Date"
+                    className={
+                      touched.officePacketReturnDate &&
+                      errors.officePacketReturnDate
+                        ? "error"
+                        : "bx--col"
+                    }
+                    dateid="office-packet-id"
+                    name="officePacketReturnDate"
+                    value={values.officePacketReturnDate}
+                    onBlur={handleBlur}
+                  />
+                  {touched.officePacketReturnDate &&
+                  errors.officePacketReturnDate ? (
+                    <div className="error-message">
+                      {errors.officePacketReturnDate}
+                    </div>
+                  ) : null}
+                </div>
               </div>
 
               <div>
@@ -175,16 +301,6 @@ class ReturnOfficeRough extends Component {
                   <span style={{ color: "#0D9F37" }}>
                     {this.state.sumOfAmount} /-
                   </span>
-                </h5>
-              </div>
-              <div className="assign-headding-wrapper">
-                <h5 className="h5-form-label">
-                  Carat Remaining :{" "}
-                  <span style={{ color: "#8A3FFC" }}>45.06</span>
-                </h5>
-                <h5 className="h5-form-label">
-                  Remaining Carat Price :{" "}
-                  <span style={{ color: "#8A3FFC" }}>30,000 /-</span>
                 </h5>
               </div>
               <div className="bx--modal-footer modal-custome-footer">
@@ -213,4 +329,8 @@ class ReturnOfficeRough extends Component {
   }
 }
 
-export default ReturnOfficeRough;
+const mapStateToProps = (state) => ({ ...state.Test });
+
+export default connect(mapStateToProps, { getRoughPrefrence })(
+  ReturnOfficeRough
+);

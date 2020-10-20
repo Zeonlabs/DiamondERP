@@ -22,7 +22,11 @@ class Model extends Component {
           onRequestClose={this.props.close}
           // selectorPrimaryFocus
         >
-          <TabView tabContent={this.props.tabContent} />
+          <TabView
+            tabContent={this.props.tabContent}
+            handelModelTabChange={this.props.handelModelTabChange}
+            tabSelected={this.props.tabSelected}
+          />
         </Modal>
       </div>
     );

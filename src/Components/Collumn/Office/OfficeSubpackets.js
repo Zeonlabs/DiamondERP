@@ -1,57 +1,82 @@
 export const OfficeSubPackets = [
-  // {
-  //   header: "View",
-  //   key: "id",
-  //   // size: "20px",
-  // },
   {
     header: "PacketId",
-    key: "name",
+    key: "srno",
     // size: "200px",
   },
   {
-    header: "Issue Date",
-    key: "protocol",
-    // size: "50px",
-  },
-  {
-    header: "Return Date",
-    key: "port",
-    // size: "50px",
-  },
-  {
-    header: "Emp Name",
-    key: "rule",
-    // size: "155px",
-  },
-  {
-    header: "Process",
-    key: "attached_groups",
+    header: "Assign Name",
+    key: "chapka_manager_name",
     // size: "300px",
   },
   {
     header: "Packet Carat",
-    key: "status",
-    // size: "100px",
-  },
-  {
-    header: "Piece",
-    key: "name",
-    // size: "200px",
-  },
-  {
-    header: "Return Carat",
-    key: "attached_groups",
-    // size: "200px",
-  },
-  {
-    header: "Weight Lose",
-    key: "protocol",
+    key: "chapka_issueCarat",
     // size: "50px",
   },
   {
-    header: "Return Piece",
-    key: "attached_groups",
+    header: "Return carat",
+    key: "chapka_return_carat",
+    // size: "50px",
+  },
+  {
+    header: "Weight lose",
+    key: "chapka_diffrence",
+    // size: "155px",
+  },
+
+  {
+    header: "issue Date",
+    key: "chapka_assign_date",
+    // size: "100px",
+  },
+  {
+    header: "Return Date",
+    key: "chapka_return_date",
+    // size: "200px",
+  },
+  {
+    header: "Action",
+    key: "btn",
+    size: "150px",
+  },
+];
+
+export const OfficeSawingSubPackets = [
+  {
+    header: "PacketId",
+    key: "srno",
+    // size: "200px",
+  },
+  {
+    header: "Assign Name",
+    key: "sawing_manager_name",
+    // size: "300px",
+  },
+  {
+    header: "Packet Carat",
+    key: "sawing_issueCarat",
+    // size: "50px",
+  },
+  {
+    header: "Return carat",
+    key: "sawing_return_carat",
+    // size: "50px",
+  },
+  {
+    header: "Weight lose",
+    key: "sawing_diffrence",
+    // size: "155px",
+  },
+
+  {
+    header: "issue Date",
+    key: "sawing_assign_date",
+    // size: "100px",
+  },
+  {
+    header: "Return Date",
+    key: "sawing_return_date",
     // size: "200px",
   },
   {
