@@ -89,7 +89,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "formik": "^2.1.4",
-    "highcharts": "^8.0.4",
+    "highcharts": "^9.0.0",
     "is-online": "^8.2.0",
     "joi": "^17.2.1",
     "jquery": "^3.4.1",
