@@ -70,7 +70,7 @@
     "@material-ui/icons": "^4.9.1",
     "@types/express-fileupload": "^1.1.2",
     "animated-number-react": "0.0.2",
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
