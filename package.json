@@ -86,7 +86,7 @@
     "electron-is-dev": "^1.1.0",
     "electron-logger": "0.0.3",
     "electron-packager": "^14.2.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.6",
     "formik": "^2.1.4",
     "highcharts": "^8.0.4",
